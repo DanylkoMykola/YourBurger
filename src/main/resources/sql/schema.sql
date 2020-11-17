@@ -2,7 +2,7 @@
 CREATE TABLE IF NOT EXISTS BURGERS (
                          BURID INT NOT NULL AUTO_INCREMENT,
                          NAME VARCHAR(40) NOT NULL,
-                         IMAGE BLOB,
+                         IMAGE MEDIUMBLOB,
                          DESCRIPTION VARCHAR(1000),
                          PRICE INT NOT NULL,
                          PRIMARY KEY (BURID)
