@@ -3,46 +3,49 @@ package com.danylko.yourburger.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Objects;
 
 @Entity
 @Table(name = "burgers")
 public class Burger implements Serializable {
 
-    private int burid;
-    private String name;
-    private byte[] image;
-    private String description;
-    private int price;
-    private int version;
-
-    public void setBurid(int burid) {
-        this.burid = burid;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "BURID")
+    private int burid;
+
+    @Column(name = "NAME")
+    private String name;
+
+    @Column(name = "IMAGE")
+    private byte[] image;
+
+    @Column(name = "DESCRIPTION")
+    private String description;
+
+    @Column(name = "PRICE")
+    private int price;
+
+    @Version
+    @Column(name = "VERSION")
+    private int version;
+
     public int getBurid() {
         return this.burid;
     }
 
-    @Version
-    @Column(name = "VERSION")
     public int getVersion() {
         return this.version;
     }
 
-    @Column(name = "IMAGE")
     public byte[] getImage() {
         return this.image;
     }
 
-    @Column(name = "DESCRIPTION")
     public String getDescription() {
         return this.description;
     }
 
-    @Column(name = "PRICE")
     public int getPrice() {
         return this.price;
     }
@@ -77,5 +80,19 @@ public class Burger implements Serializable {
                 ", price=" + price +
                 ", version=" + version +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Burger burger = (Burger) o;
+        return burid == burger.burid &&
+                Objects.equals(name, burger.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(burid, name);
     }
 }
