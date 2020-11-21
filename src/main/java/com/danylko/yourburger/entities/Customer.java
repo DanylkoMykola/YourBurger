@@ -36,35 +36,35 @@ public class Customer implements Serializable {
     private Set<Address> addresses = new HashSet<>();
 
     public int getCustid() {
-        return this.custid;
+        return custid;
     }
 
     public String getFristname() {
-        return this.fristname;
+        return fristname;
     }
 
     public String getSurname() {
-        return this.surname;
+        return surname;
     }
 
     public String getPhonenumber() {
-        return this.phonenumber;
+        return phonenumber;
     }
 
     public String getEmail() {
-        return this.email;
+        return email;
     }
 
     public String getPassword() {
-        return this.password;
+        return password;
     }
 
     public int getRating() {
-        return this.rating;
+        return rating;
     }
 
     public Set<Address> getAddresses() {
-        return this.addresses;
+        return addresses;
     }
 
     public void setCustid(int custid) {
@@ -109,4 +109,17 @@ public class Customer implements Serializable {
         getAddresses().remove(address);
     }
 
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "custid=" + custid +
+                ", fristname='" + fristname + '\'' +
+                ", surname='" + surname + '\'' +
+                ", phonenumber='" + phonenumber + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", rating=" + rating +
+                ", addresses=" + addresses +
+                '}';
+    }
 }
