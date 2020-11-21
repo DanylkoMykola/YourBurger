@@ -11,17 +11,17 @@ public class Customer implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "CUSTID")
-    private int custid;
+    @Column(name = "CUST_ID")
+    private int custId;
 
-    @Column(name = "FIRSTNAME")
+    @Column(name = "FIRST_NAME")
     private String fristname;
 
-    @Column(name = "SURNAME")
-    private String surname;
+    @Column(name = "LAST_NAME")
+    private String lastName;
 
-    @Column(name = "PHONENUMBER")
-    private String phonenumber;
+    @Column(name = "PHONE_NUMBER")
+    private String phoneNumber;
 
     @Column(name = "EMAIL")
     private String email;
@@ -35,20 +35,23 @@ public class Customer implements Serializable {
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Address> addresses = new HashSet<>();
 
-    public int getCustid() {
-        return custid;
+    @OneToOne(mappedBy = "customer")
+    private Order order;
+
+    public int getCustId() {
+        return custId;
     }
 
     public String getFristname() {
         return fristname;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public String getPhonenumber() {
-        return phonenumber;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     public String getEmail() {
@@ -63,25 +66,27 @@ public class Customer implements Serializable {
         return rating;
     }
 
+    public Order getOrder() { return this.order; }
+
     public Set<Address> getAddresses() {
         return addresses;
     }
 
-    public void setCustid(int custid) {
-        this.custid = custid;
+    public void setCustId(int custId) {
+        this.custId = custId;
     }
 
     public void setFristname(String fristname) {
         this.fristname = fristname;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
 
-    public void setPhonenumber(String phonenumber) {
-        this.phonenumber = phonenumber;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public void setEmail(String email) {
@@ -95,6 +100,8 @@ public class Customer implements Serializable {
     public void setRating(int rating) {
         this.rating = rating;
     }
+
+    public void setOrder(Order order) { this.order = order; }
 
     public void setAddresses(Set<Address> addresses) {
         this.addresses = addresses;
@@ -112,10 +119,10 @@ public class Customer implements Serializable {
     @Override
     public String toString() {
         return "Customer{" +
-                "custid=" + custid +
+                "custid=" + custId +
                 ", fristname='" + fristname + '\'' +
-                ", surname='" + surname + '\'' +
-                ", phonenumber='" + phonenumber + '\'' +
+                ", surname='" + lastName + '\'' +
+                ", phonenumber='" + phoneNumber + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", rating=" + rating +

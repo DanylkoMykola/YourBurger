@@ -4,45 +4,58 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
+@Table(name = "facility")
 public class Facility implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "FACID")
-    private int facid;
+    @Column(name = "FAC_ID")
+    private int facId;
 
-    @Column(name = "FACCITY")
-    private String faccity;
+    @Column(name = "FAC_CITY")
+    private String facCity;
 
-    @Column(name = "SERVINGCITY")
-    private String servingcity;
+    @Column(name = "SERVING_CITY")
+    private String servingCity;
 
-    public int getFacid() {
-        return facid;
+    @OneToOne(mappedBy = "facility")
+    private Order order;
+
+    public int getFacId() {
+        return facId;
     }
 
-    public String getFaccity() {
-        return faccity;
+    public String getFacCity() {
+        return facCity;
     }
 
-    public String getServingcity() {
-        return servingcity;
+    public String getServingCity() {
+        return servingCity;
     }
 
-    public void setFaccity(String faccity) {
-        this.faccity = faccity;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setServingcity(String servingcity) {
-        this.servingcity = servingcity;
+    public void setFacCity(String facCity) {
+        this.facCity = facCity;
+    }
+
+    public void setServingCity(String servingCity) {
+        this.servingCity = servingCity;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     @Override
     public String toString() {
         return "Facility{" +
-                "facid=" + facid +
-                ", faccity='" + faccity + '\'' +
-                ", servingcity='" + servingcity + '\'' +
+                "facid=" + facId +
+                ", faccity='" + facCity + '\'' +
+                ", servingcity='" + servingCity + '\'' +
                 '}';
     }
 
@@ -51,11 +64,11 @@ public class Facility implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Facility facility = (Facility) o;
-        return Objects.equals(faccity, facility.faccity);
+        return Objects.equals(facCity, facility.facCity);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(faccity);
+        return Objects.hash(facCity);
     }
 }

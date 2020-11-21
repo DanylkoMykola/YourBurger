@@ -9,8 +9,8 @@ public class Address implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ADDRESSID")
-    private int addressid;
+    @Column(name = "ADDRESS_ID")
+    private int addressId;
 
     @Column(name = "CITY")
     private String city;
@@ -18,18 +18,21 @@ public class Address implements Serializable {
     @Column(name = "STREET")
     private String street;
 
-    @Column(name = "STREETNUMBER")
-    private String streetnumber;
+    @Column(name = "STREET_NUMBER")
+    private String streetNumber;
 
     @Column(name = "APARTMENT")
     private String apartment;
 
     @ManyToOne
-    @JoinColumn(name = "CUSTID")
+    @JoinColumn(name = "CUST_ID")
     private Customer customer;
 
-    public int getAddressid() {
-        return addressid;
+    @OneToOne(mappedBy = "address")
+    private Order order;
+
+    public int getAddressId() {
+        return addressId;
     }
 
     public String getCity() {
@@ -40,8 +43,8 @@ public class Address implements Serializable {
         return street;
     }
 
-    public String getStreetnumber() {
-        return streetnumber;
+    public String getStreetNumber() {
+        return streetNumber;
     }
 
     public String getApartment() {
@@ -52,8 +55,10 @@ public class Address implements Serializable {
         return customer;
     }
 
-    public void setAddressid(int addressid) {
-        this.addressid = addressid;
+    public Order getOrder() { return this.order; }
+
+    public void setAddressId(int addressId) {
+        this.addressId = addressId;
     }
 
     public void setCity(String city) {
@@ -64,8 +69,8 @@ public class Address implements Serializable {
         this.street = street;
     }
 
-    public void setStreetnumber(String streetnumber) {
-        this.streetnumber = streetnumber;
+    public void setStreetNumber(String streetNumber) {
+        this.streetNumber = streetNumber;
     }
 
     public void setApartment(String apartment) {
@@ -76,13 +81,15 @@ public class Address implements Serializable {
         this.customer = customer;
     }
 
+    public void setOrder(Order order) { this.order = order; }
+
     @Override
     public String toString() {
         return "Address{" +
-                "addressid=" + addressid +
+                "addressid=" + addressId +
                 ", city='" + city + '\'' +
                 ", street='" + street + '\'' +
-                ", streetnumber='" + streetnumber + '\'' +
+                ", streetnumber='" + streetNumber + '\'' +
                 ", apartment='" + apartment + '\'' +
                 ", customer=" + customer +
                 '}';

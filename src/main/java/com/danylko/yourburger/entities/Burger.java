@@ -3,7 +3,9 @@ package com.danylko.yourburger.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "burgers")
@@ -11,8 +13,8 @@ public class Burger implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "BURID")
-    private int burid;
+    @Column(name = "BUR_ID")
+    private int burId;
 
     @Column(name = "NAME")
     private String name;
@@ -30,9 +32,18 @@ public class Burger implements Serializable {
     @Column(name = "VERSION")
     private int version;
 
-    public int getBurid() {
-        return this.burid;
+    @ManyToMany
+    @JoinTable(name = "product_list",
+            joinColumns = @JoinColumn(name = "ORDER_ID"),
+            inverseJoinColumns = @JoinColumn(name = "BUR_ID")
+    )
+    private Set<Order> orders = new HashSet<>();
+
+    public int getBurId() {
+        return this.burId;
     }
+
+    public String getName() { return this.name; }
 
     public int getVersion() {
         return this.version;
@@ -50,6 +61,9 @@ public class Burger implements Serializable {
         return this.price;
     }
 
+    public Set<Order> getOrders() {
+        return this.orders;
+    }
     public void setName(String name) {
         this.name = name;
     }
@@ -70,10 +84,14 @@ public class Burger implements Serializable {
         this.version = version;
     }
 
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
+    }
+
     @Override
     public String toString() {
         return "Burger{" +
-                "burid=" + burid +
+                "burid=" + burId +
                 ", name='" + name + '\'' +
                 ", image=" + Arrays.toString(image) +
                 ", description='" + description + '\'' +
@@ -87,12 +105,12 @@ public class Burger implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Burger burger = (Burger) o;
-        return burid == burger.burid &&
+        return burId == burger.burId &&
                 Objects.equals(name, burger.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(burid, name);
+        return Objects.hash(burId, name);
     }
 }
