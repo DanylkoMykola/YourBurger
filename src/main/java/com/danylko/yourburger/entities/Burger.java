@@ -14,7 +14,7 @@ public class Burger implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "BUR_ID")
-    private int burId;
+    private Long burId;
 
     @Column(name = "NAME")
     private String name;
@@ -39,7 +39,7 @@ public class Burger implements Serializable {
     )
     private Set<Order> orders = new HashSet<>();
 
-    public int getBurId() {
+    public Long getBurId() {
         return this.burId;
     }
 
