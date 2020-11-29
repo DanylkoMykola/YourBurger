@@ -1,4 +1,4 @@
-package com.danylko.yourburger.controller;
+package com.danylko.yourburger.web;
 
 import com.danylko.yourburger.entities.Burger;
 import com.danylko.yourburger.service.BurgerService;
@@ -25,7 +25,7 @@ public class BurgerController {
     public String list(Model uiModel) {
         List<Burger> burgers = burgerService.findAll();
         uiModel.addAttribute("burgers", burgers);
-        return "burgers/list";
+        return "burgers";
     }
 
     @GetMapping(value = "/{id}")
