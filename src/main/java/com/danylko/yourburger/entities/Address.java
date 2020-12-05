@@ -21,7 +21,7 @@ public class Address implements Serializable {
     @Column(name = "STREET_NUMBER")
     private String streetNumber;
 
-    @Column(name = "APARTMENT")
+    @Column(name = "APARTMENT_NUMBER")
     private String apartment;
 
     @ManyToOne

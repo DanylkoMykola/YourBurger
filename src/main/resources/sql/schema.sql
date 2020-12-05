@@ -1,58 +1,73 @@
+DROP TABLE IF EXISTS BURGERS;
 
-CREATE TABLE IF NOT EXISTS BURGERS (
-                         BURID INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE  BURGERS (
+                         BUR_ID INT NOT NULL AUTO_INCREMENT,
                          NAME VARCHAR(40) NOT NULL,
                          IMAGE MEDIUMBLOB,
                          DESCRIPTION VARCHAR(1000),
                          PRICE INT NOT NULL,
-                         PRIMARY KEY (BURID)
+                         VERSION INT,
+                         PRIMARY KEY (BUR_ID)
 );
 
-CREATE TABLE IF NOT EXISTS CUSTOMERS (
-                           CUSTID INT NOT NULL AUTO_INCREMENT,
-                           ADDRESSID INT NOT NULL,
-                           FIRSTNAME VARCHAR(40),
-                           SURNAME VARCHAR(40),
-                           PHONENUMBER VARCHAR(30),
+DROP TABLE IF EXISTS CUSTOMERS;
+
+CREATE TABLE CUSTOMERS (
+                           CUST_ID INT NOT NULL AUTO_INCREMENT,
+                           ADDRESS_ID INT NOT NULL,
+                           FIRST_NAME VARCHAR(40),
+                           LAST_NAME VARCHAR(40),
+                           PHONE_NUMBER VARCHAR(30),
                            EMAIL VARCHAR(80),
                            PASSWORD VARCHAR(50),
                            RATING INT,
-                           PRIMARY KEY  (CUSTID),
-                           FOREIGN KEY (ADDRESSID) REFERENCES ADDRESSES(ADDRESSID)
+                           PRIMARY KEY  (CUST_ID),
+                           FOREIGN KEY (ADDRESS_ID) REFERENCES ADDRESSES(ADDRESS_ID)
 );
 
-CREATE TABLE IF NOT EXISTS ADDRESSES (
-                           ADDRESSID INT NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS ADDRESSES;
+
+CREATE TABLE ADDRESSES (
+                           ADDRESS_ID INT NOT NULL AUTO_INCREMENT,
                            CITY VARCHAR(30),
                            STREET VARCHAR(60),
-                           STREETNUMBER VARCHAR(10),
-                           APARTMENTNUMBER VARCHAR(5),
-                           PRIMARY KEY (ADDRESSID)
+                           STREET_NUMBER VARCHAR(10),
+                           APARTMENT_NUMBER VARCHAR(5),
+                           PRIMARY KEY (ADDRESS_ID)
 );
 
-CREATE TABLE IF NOT EXISTS ORDERS (
-                        ORDERID INT NOT NULL AUTO_INCREMENT,
-                        CUSTID INT NOT NULL,
-                        ADDRESSID INT NOT NULL,
-                        FACID INT NOT NULL,
-                        TOTALPRICE INT,
-                        ORDERDATE TIMESTAMP,
-                        PRIMARY KEY (ORDERID),
-                        FOREIGN KEY (CUSTID) REFERENCES CUSTOMERS(CUSTID),
-                        FOREIGN KEY (ADDRESSID) REFERENCES ADDRESSES(ADDRESSID),
-                        FOREIGN KEY (FACID) REFERENCES FACILITIES(FACID)
+DROP TABLE IF EXISTS ORDERS;
+
+CREATE TABLE ORDERS (
+                        ORDER_ID INT NOT NULL AUTO_INCREMENT,
+                        CUST_ID INT NOT NULL,
+                        ADDRESS_ID INT NOT NULL,
+                        FAC_ID INT NOT NULL,
+                        TOTAL_PRICE INT,
+                        ORDER_DATE TIMESTAMP,
+                        VERSION INT,
+                        PRIMARY KEY (ORDER_ID),
+                        FOREIGN KEY (CUST_ID) REFERENCES CUSTOMERS(CUST_ID),
+                        FOREIGN KEY (ADDRESS_ID) REFERENCES ADDRESSES(ADDRESS_ID),
+                        FOREIGN KEY (FAC_ID) REFERENCES FACILITIES(FAC_ID)
 );
 
-CREATE TABLE IF NOT EXISTS FACILITIES (
-                            FACID INT NOT NULL AUTO_INCREMENT,
-                            FACCITY VARCHAR(30),
-                            SERVCITYID INT NOT NULL,
-                            PRIMARY KEY (FACID),
-                            FOREIGN KEY (SERVCITYID) REFERENCES SERVICECITY(SERCITYID)
+DROP TABLE IF EXISTS FACILITIES;
+
+CREATE TABLE FACILITIES (
+                            FAC_ID INT NOT NULL AUTO_INCREMENT,
+                            FAC_CITY VARCHAR(30),
+                            SERVING_CITY VARCHAR(30),
+                            PRIMARY KEY (FAC_ID)
 );
 
-CREATE TABLE IF NOT EXISTS SERVICECITY (
-                              SERCITYID INT NOT NULL AUTO_INCREMENT,
-                              CITY VARCHAR(30),
-                              PRIMARY KEY  (SERCITYID)
+DROP TABLE IF EXISTS PRODUCT_LIST;
+
+CREATE TABLE PRODUCT_LIST (
+    ORDER_ID INT NOT NULL,
+    BUR_ID INT NOT NULL,
+    COUNT INT,
+    FOREIGN KEY (ORDER_ID) REFERENCES ORDERS(ORDER_ID),
+    FOREIGN KEY (BUR_ID) REFERENCES BURGERS(BUR_ID)
 );
+

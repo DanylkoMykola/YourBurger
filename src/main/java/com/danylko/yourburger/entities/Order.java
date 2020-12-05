@@ -34,8 +34,8 @@ public class Order implements Serializable {
     @JoinColumn(name = "ADDRESS_ID")
     private Address address;
 
-    @Column(name = "PRICE")
-    private int price;
+    @Column(name = "TOTAL_PRICE")
+    private int totalPrice;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "ORDER_DATE")
@@ -61,8 +61,8 @@ public class Order implements Serializable {
         return address;
     }
 
-    public int getPrice() {
-        return price;
+    public int getTotalPrice() {
+        return totalPrice;
     }
 
     public Date getOrderDate() {
@@ -89,8 +89,8 @@ public class Order implements Serializable {
         this.address = address;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public void setOrderDate(Date orderDate) {
@@ -109,7 +109,7 @@ public class Order implements Serializable {
                 ", facility=" + facility +
                 ", customer=" + customer +
                 ", address=" + address +
-                ", price=" + price +
+                ", price=" + totalPrice +
                 ", orderDate=" + orderDate +
                 ", version=" + version +
                 '}';

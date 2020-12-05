@@ -10,11 +10,11 @@ import java.io.IOException;
 @SpringBootApplication
 public class YourburgerApplication {
 
-    private static Logger log = LoggerFactory.getLogger(YourburgerApplication.class);
+    private static Logger logger = LoggerFactory.getLogger(YourburgerApplication.class);
 
     public static void main(String[] args) throws IOException {
         SpringApplication.run(YourburgerApplication.class, args);
-
+        logger.info("Start App");
     }
 
 }
