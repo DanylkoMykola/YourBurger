@@ -12,9 +12,8 @@ public class YourburgerApplication {
 
     private static Logger logger = LoggerFactory.getLogger(YourburgerApplication.class);
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         SpringApplication.run(YourburgerApplication.class, args);
-        logger.info("Start App");
     }
 
 }

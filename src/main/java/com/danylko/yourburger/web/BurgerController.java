@@ -28,7 +28,7 @@ public class BurgerController {
         return "burgers";
     }
 
-    @GetMapping(value = "/{id}")
+   /* @GetMapping(value = "/{id}")
     public String show(@PathVariable("id") Long id, Model uiModel) {
         Burger burger = burgerService.findById(id);
         uiModel.addAttribute("burger", burger);
@@ -52,7 +52,7 @@ public class BurgerController {
     public String saveBurger(@Valid Burger burger) {
         burgerService.save(burger);
         return "redirect:/burgers/" + burger.getBurId();
-    }
+    }*/
 
 
 }

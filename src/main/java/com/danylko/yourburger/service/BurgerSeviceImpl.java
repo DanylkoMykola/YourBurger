@@ -48,8 +48,4 @@ public class BurgerSeviceImpl implements BurgerService {
         burgerRepository.delete(burger);
     }
 
-    @Override
-    public Page<Burger> findAllByPage(Pageable pageable) {
-        return null;
-    }
 }
