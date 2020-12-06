@@ -6,7 +6,7 @@ CREATE TABLE  BURGERS (
                          IMAGE MEDIUMBLOB,
                          DESCRIPTION VARCHAR(1000),
                          PRICE INT NOT NULL,
-                         VERSION INT,
+                         VERSION INT NOT NULL,
                          PRIMARY KEY (BUR_ID)
 );
 
@@ -45,7 +45,7 @@ CREATE TABLE ORDERS (
                         FAC_ID INT NOT NULL,
                         TOTAL_PRICE INT,
                         ORDER_DATE TIMESTAMP,
-                        VERSION INT,
+                        VERSION INT NOT NULL,
                         PRIMARY KEY (ORDER_ID),
                         FOREIGN KEY (CUST_ID) REFERENCES CUSTOMERS(CUST_ID),
                         FOREIGN KEY (ADDRESS_ID) REFERENCES ADDRESSES(ADDRESS_ID),

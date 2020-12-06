@@ -19,24 +19,19 @@
         <div class="lead">
             <table class = "table table-striped">
                 <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
+                    <th>Name</th>
+                    <th>Image</th>
                     <th>Description</th>
-                    <th>View</th>
-                    <th>Edit</th>
+                    <th>Price</th>
                 </tr>
                 <tr th:each="burger : ${burgers}">
                     <td th:text="${burger.name}">Burger Name</td>
                     <td th:text="${burger.image}">Burger Image</td>
                     <td th:text="${burger.description}">Burger Description</td>
                     <td th:text="${burger.price}">Burger price</td>
-                    <td><a th:href="${ '/burgers/' + burger.burId}">View</a></td>
-                    <td><a th:href="${'/burgers/edit/' + burger.burId}">Edit</a></td>
                 </tr>
             </table>
         </div>
-
-        <div th:insert="~{fragments/footer :: footer}">&copy; 2017 Iuliana Cosmina & Apress</div>
     </div>
 </div>
 </body>

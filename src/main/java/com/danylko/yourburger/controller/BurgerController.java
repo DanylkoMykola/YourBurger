@@ -1,4 +1,4 @@
-package com.danylko.yourburger.web;
+package com.danylko.yourburger.controller;
 
 import com.danylko.yourburger.entities.Burger;
 import com.danylko.yourburger.service.BurgerService;
@@ -9,22 +9,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
-@RequestMapping(name = "/burgers")
+
 @Controller
 public class BurgerController {
 
-    private Logger log = LoggerFactory.getLogger(BurgerController.class);
+    private Logger logger = LoggerFactory.getLogger(BurgerController.class);
 
     @Autowired
     private BurgerService burgerService;
 
-    @GetMapping
+    @RequestMapping(value = {"/templates/burgers", "/burgers" }, method = RequestMethod.GET)
     public String list(Model uiModel) {
+        logger.info("Start method list");
         List<Burger> burgers = burgerService.findAll();
         uiModel.addAttribute("burgers", burgers);
+        logger.info("End method list");
         return "burgers";
     }
 
