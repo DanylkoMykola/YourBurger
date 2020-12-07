@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import javax.validation.Valid;
 
 import java.util.List;
 
@@ -47,13 +48,17 @@ public class BurgerController {
         Burger burger = new Burger();
         uiModel.addAttribute("burger", burger);
         return "update";
-    }
-
-    @PostMapping
-    public String saveBurger(@Valid Burger burger) {
-        burgerService.save(burger);
-        return "redirect:/burgers/" + burger.getBurId();
     }*/
 
-
+    @RequestMapping(value = "/burgerform", method = RequestMethod.POST)
+    public String saveBurger(@ModelAttribute Burger burger, Model model) {
+        burgerService.save(burger);
+        model.addAttribute("burger", burger);
+        return "burgerform";
+    }
+    @RequestMapping(value = "/burgerform", method = RequestMethod.GET)
+    public String createBurger(@ModelAttribute Burger burger, Model model) {
+        model.addAttribute("burger", burger);
+        return "burgerform";
+    }
 }
