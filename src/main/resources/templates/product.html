@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="container">
-    <div class="text-left" th:if="${not #lists.isEmpty(burgers)}">
+    <div class="text-left" th:if="${not #lists.isEmpty(products)}">
 
         <h1>Burger List</h1>
 
@@ -24,11 +24,11 @@
                     <th>Description</th>
                     <th>Price</th>
                 </tr>
-                <tr th:each="burger : ${burgers}">
-                    <td th:text="${burger.name}">Burger Name</td>
-                    <td th:text="${burger.image}">Burger Image</td>
-                    <td th:text="${burger.description}">Burger Description</td>
-                    <td th:text="${burger.price}">Burger price</td>
+                <tr th:each="product : ${products}">
+                    <td th:text="${product.name}">Burger Name</td>
+                    <td th:text="${product.image}">Burger Image</td>
+                    <td th:text="${product.description}">Burger Description</td>
+                    <td th:text="${product.price}">Burger price</td>
                 </tr>
             </table>
         </div>

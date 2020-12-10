@@ -1,33 +1,32 @@
 package com.danylko.yourburger.controller;
 
-import com.danylko.yourburger.entities.Burger;
-import com.danylko.yourburger.service.BurgerService;
+import com.danylko.yourburger.entities.Product;
+import com.danylko.yourburger.service.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import javax.validation.Valid;
 
 import java.util.List;
 
 
 @Controller
-public class BurgerController {
+public class ProductController {
 
-    private Logger logger = LoggerFactory.getLogger(BurgerController.class);
+    private Logger logger = LoggerFactory.getLogger(ProductController.class);
 
     @Autowired
-    private BurgerService burgerService;
+    private ProductService productService;
 
-    @RequestMapping(value = {"/templates/burgers", "/burgers" }, method = RequestMethod.GET)
+   @GetMapping("/products")
     public String list(Model uiModel) {
         logger.info("Start method list");
-        List<Burger> burgers = burgerService.findAll();
-        uiModel.addAttribute("burgers", burgers);
+        List<Product> products = productService.findAll();
+        uiModel.addAttribute("products", products);
         logger.info("End method list");
-        return "burgers";
+        return "product";
     }
 
    /* @GetMapping(value = "/{id}")
@@ -50,15 +49,14 @@ public class BurgerController {
         return "update";
     }*/
 
-    @RequestMapping(value = "/burgerform", method = RequestMethod.POST)
-    public String saveBurger(@ModelAttribute Burger burger, Model model) {
-        burgerService.save(burger);
-        model.addAttribute("burger", burger);
-        return "burgerform";
+    @PostMapping("/productform")
+    public String saveBurger(@ModelAttribute Product product, Model model) {
+        productService.save(product);
+        return "productform";
     }
-    @RequestMapping(value = "/burgerform", method = RequestMethod.GET)
-    public String createBurger(@ModelAttribute Burger burger, Model model) {
-        model.addAttribute("burger", burger);
-        return "burgerform";
+    @GetMapping("/productform")
+    public String createBurger(@ModelAttribute Product product, Model model) {
+        model.addAttribute("product", product);
+        return "productform";
     }
 }

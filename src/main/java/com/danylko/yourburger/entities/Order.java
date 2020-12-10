@@ -18,9 +18,9 @@ public class Order implements Serializable {
     @ManyToMany
     @JoinTable(name = "product_list",
             joinColumns = @JoinColumn(name = "ORDER_ID"),
-            inverseJoinColumns = @JoinColumn(name = "BUR_ID")
+            inverseJoinColumns = @JoinColumn(name = "PROD_ID")
     )
-    private Set<Burger> burgers = new HashSet<>();
+    private Set<Product> products = new HashSet<>();
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "FAC_ID")
@@ -45,8 +45,8 @@ public class Order implements Serializable {
     @Column(name = "VERSION")
     private int version;
 
-    public Set<Burger> getBurgers() {
-        return burgers;
+    public Set<Product> getProducts() {
+        return products;
     }
 
     public Facility getFacility() {
@@ -73,8 +73,8 @@ public class Order implements Serializable {
         return version;
     }
 
-    public void setBurgers(Set<Burger> burgers) {
-        this.burgers = burgers;
+    public void setProducts(Set<Product> products) {
+        this.products = products;
     }
 
     public void setFacility(Facility facility) {
@@ -105,7 +105,7 @@ public class Order implements Serializable {
     public String toString() {
         return "Order{" +
                 "orderId=" + orderId +
-                ", burgers=" + burgers +
+                ", products=" + products +
                 ", facility=" + facility +
                 ", customer=" + customer +
                 ", address=" + address +

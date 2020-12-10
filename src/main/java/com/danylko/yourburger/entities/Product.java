@@ -2,25 +2,24 @@ package com.danylko.yourburger.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "burgers")
-public class Burger implements Serializable {
+@Table(name = "products")
+public class Product implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "BUR_ID")
-    private Long burId;
+    @Column(name = "PROD_ID")
+    private Long prodId;
 
     @Column(name = "NAME")
     private String name;
 
     @Column(name = "IMAGE")
-    private byte[] image;
+    private String image;
 
     @Column(name = "DESCRIPTION")
     private String description;
@@ -35,12 +34,12 @@ public class Burger implements Serializable {
     @ManyToMany
     @JoinTable(name = "product_list",
             joinColumns = @JoinColumn(name = "ORDER_ID"),
-            inverseJoinColumns = @JoinColumn(name = "BUR_ID")
+            inverseJoinColumns = @JoinColumn(name = "PROD_ID")
     )
     private Set<Order> orders = new HashSet<>();
 
-    public Long getBurId() {
-        return this.burId;
+    public Long getProdId() {
+        return this.prodId;
     }
 
     public String getName() { return this.name; }
@@ -49,7 +48,7 @@ public class Burger implements Serializable {
         return this.version;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return this.image;
     }
 
@@ -64,11 +63,12 @@ public class Burger implements Serializable {
     public Set<Order> getOrders() {
         return this.orders;
     }
+
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
@@ -90,10 +90,10 @@ public class Burger implements Serializable {
 
     @Override
     public String toString() {
-        return "Burger{" +
-                "burid=" + burId +
+        return "Product{" +
+                "prod_id=" + prodId +
                 ", name='" + name + '\'' +
-                ", image=" + Arrays.toString(image) +
+                ", image=" + image +
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 ", version=" + version +
@@ -104,13 +104,13 @@ public class Burger implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Burger burger = (Burger) o;
-        return burId == burger.burId &&
-                Objects.equals(name, burger.name);
+        Product product = (Product) o;
+        return prodId == product.prodId &&
+                Objects.equals(name, product.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(burId, name);
+        return Objects.hash(prodId, name);
     }
 }
