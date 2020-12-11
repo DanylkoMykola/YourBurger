@@ -5,11 +5,16 @@ import com.danylko.yourburger.service.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 
 @Controller
@@ -19,6 +24,9 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+
+    @Value("${upload.path}")
+    private String uploadPath;
 
    @GetMapping("/products")
     public String list(Model uiModel) {
@@ -50,7 +58,23 @@ public class ProductController {
     }*/
 
     @PostMapping("/productform")
-    public String saveBurger(@ModelAttribute Product product, Model model) {
+    public String saveProd(@RequestParam("image") MultipartFile file,
+                             @ModelAttribute Product product) {
+        try {
+            if (file != null && !file.getOriginalFilename().isEmpty()) {
+                File uploadDir = new File(uploadPath);
+
+                if (!uploadDir.exists()) {
+                    uploadDir.mkdir();
+                }
+                String uuidFile = UUID.randomUUID().toString();
+                String fileName = uuidFile + "." + file.getOriginalFilename();
+                file.transferTo(new File(uploadPath + "/" + fileName));
+                product.setImage(fileName);
+            }
+        } catch (IOException  e) {
+            logger.info("IOException. 'saveProd()' method have a problem to upload/download a file!");
+        }
         productService.save(product);
         return "productform";
     }
