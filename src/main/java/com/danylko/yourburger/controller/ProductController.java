@@ -1,7 +1,9 @@
 package com.danylko.yourburger.controller;
 
+import com.danylko.yourburger.entities.FileResponse;
 import com.danylko.yourburger.entities.Product;
 import com.danylko.yourburger.service.ProductService;
+import com.danylko.yourburger.service.StorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -25,8 +29,8 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @Value("${upload.path}")
-    private String uploadPath;
+    @Autowired
+    private StorageService storageService;
 
    @GetMapping("/products")
     public String list(Model uiModel) {
@@ -37,50 +41,25 @@ public class ProductController {
         return "product";
     }
 
-   /* @GetMapping(value = "/{id}")
-    public String show(@PathVariable("id") Long id, Model uiModel) {
-        Burger burger = burgerService.findById(id);
-        uiModel.addAttribute("burger", burger);
-        return "show";
-    }
-
-    @GetMapping(name = "/edit/{id}")
-    public String updateForm(@PathVariable Long id, Model uiModel) {
-        uiModel.addAttribute("burger", burgerService.findById(id));
-        return "update";
-    }
-
-    @GetMapping(name = "/new")
-    public String createForm(Model uiModel) {
-        Burger burger = new Burger();
-        uiModel.addAttribute("burger", burger);
-        return "update";
-    }*/
-
     @PostMapping("/productform")
-    public String saveProd(@RequestParam("image") MultipartFile file,
-                             @ModelAttribute Product product) {
-        try {
-            if (file != null && !file.getOriginalFilename().isEmpty()) {
-                File uploadDir = new File(uploadPath);
-
-                if (!uploadDir.exists()) {
-                    uploadDir.mkdir();
-                }
-                String uuidFile = UUID.randomUUID().toString();
-                String fileName = uuidFile + "." + file.getOriginalFilename();
-                file.transferTo(new File(uploadPath + "/" + fileName));
-                product.setImage(fileName);
-            }
-        } catch (IOException  e) {
-            logger.info("IOException. 'saveProd()' method have a problem to upload/download a file!");
-        }
+    public FileResponse createProd( @ModelAttribute Product product,
+                                   @RequestParam("image") MultipartFile file,
+                                   Model model) {
+        logger.info("Strart method saveProd");
+        model.addAttribute("product", product);
+        String name = storageService.store(file);
+        String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/download/")
+                .path(name)
+                .toUriString();
+        logger.info("File Saved");
+        product.setImage(name);
         productService.save(product);
-        return "productform";
+        return new FileResponse(name, uri, file.getContentType(), file.getSize());
     }
     @GetMapping("/productform")
-    public String createBurger(@ModelAttribute Product product, Model model) {
-        model.addAttribute("product", product);
+    public String createProd(Model model) {
+        model.addAttribute("product", new Product());
         return "productform";
     }
 }
