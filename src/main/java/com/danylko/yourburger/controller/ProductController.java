@@ -42,21 +42,29 @@ public class ProductController {
     }
 
     @PostMapping("/productform")
-    public FileResponse createProd( @ModelAttribute Product product,
-                                   @RequestParam("image") MultipartFile file,
-                                   Model model) {
-        logger.info("Strart method saveProd");
-        model.addAttribute("product", product);
-        String name = storageService.store(file);
+    public String createProd( @RequestParam String name,
+                              @RequestParam String description,
+                              @RequestParam String price,
+                              @RequestParam(name = "image") MultipartFile file
+                                   ) {
+        Product product = new Product();
+        product.setName(name);
+        product.setDescription(description);
+        product.setPrice(Integer.parseInt(price));
+
+        logger.info("Start method saveProd");
+        logger.info(product.toString());
+        String fileName = storageService.store(file);
         String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/download/")
                 .path(name)
                 .toUriString();
         logger.info("File Saved");
-        product.setImage(name);
+        product.setImage(fileName);
         productService.save(product);
-        return new FileResponse(name, uri, file.getContentType(), file.getSize());
+        return "productform";
     }
+
     @GetMapping("/productform")
     public String createProd(Model model) {
         model.addAttribute("product", new Product());

@@ -12,17 +12,28 @@
 </head>
 <body>
 <h1>Додати продукт</h1>
-<form action="#"  th:action="@{/productform}" th:object="${product}" method="post" enctype="multipart/form-data">
+<form action="#"  method="post" enctype="multipart/form-data">
     <p>Назва</p>
-    <input type="text" th:field="*{name}" />
+    <input type="text" name="name"  />
     <p>Опис</p>
-    <input type="text" th:field="*{description}">
+    <input type="text" name="description">
     <p>Ціна</p>
-    <input type="text" th:field="*{price}">
+    <input type="text" name="price">
     <p>Зображення</p>
     <input type="file" name="image">
     <input type="submit" value="Підтвердити" />
     <input type="reset" value="Скинути">
+   <!-- <form action="#"  th:action="@{/productform}" th:object="${product}" method="post" enctype="multipart/form-data">
+        <p>Назва</p>
+        <input type="text" th:field="*{name}" />
+        <p>Опис</p>
+        <input type="text" th:field="*{description}">
+        <p>Ціна</p>
+        <input type="text" th:field="*{price}">
+        <p>Зображення</p>
+        <input type="file" name="image">
+        <input type="submit" value="Підтвердити" />
+        <input type="reset" value="Скинути">-->
 </form>
 </body>
 </html>
