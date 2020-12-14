@@ -1,7 +1,10 @@
 package com.danylko.yourburger.service;
 
 import com.danylko.yourburger.config.StorageProperties;
+import com.danylko.yourburger.entities.Product;
 import com.danylko.yourburger.exceptions.StorageException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +18,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
 
 @Service
 public class FileSystemStorageService implements StorageService {
+
+    Logger logger = LoggerFactory.getLogger(FileSystemStorageService.class);
 
     private final Path rootLocation;
 
@@ -61,6 +67,25 @@ public class FileSystemStorageService implements StorageService {
     @Override
     public String load(String fileName) {
         return this.rootLocation.resolve(fileName).toString();
+    }
+
+    @Override
+    public List<String> loadAll(List<Product> products) {
+        for(Product product : products) {
+            String fileName =  product.getImage();
+            logger.info("File name: " + fileName);
+            String fullPath;
+            if (fileName != null) {
+                fullPath = load(fileName);
+            }
+             else {
+                 fullPath = load("default.jpg");
+             }
+            logger.info("Full path to file: " + fullPath);
+            fullPath = fullPath.replace( "\\", "/");
+            product.setImage(fullPath);
+        }
+        return null;
     }
 
     @Override

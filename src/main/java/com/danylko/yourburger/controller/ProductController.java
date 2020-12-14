@@ -36,6 +36,7 @@ public class ProductController {
     public String list(Model uiModel) {
         logger.info("Start method list");
         List<Product> products = productService.findAll();
+        storageService.loadAll(products);
         uiModel.addAttribute("products", products);
         logger.info("End method list");
         return "product";

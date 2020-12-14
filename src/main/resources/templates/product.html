@@ -26,7 +26,7 @@
                 </tr>
                 <tr th:each="product : ${products}">
                     <td th:text="${product.name}">Burger Name</td>
-                    <td th:text="${product.image}">Burger Image</td>
+                    <td> <img th:src="@{${product.image}}" alt="Photo"> Burger Image</td>
                     <td th:text="${product.description}">Burger Description</td>
                     <td th:text="${product.price}">Burger price</td>
                 </tr>
