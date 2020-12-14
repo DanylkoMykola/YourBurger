@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+
 import java.util.List;
 
 
@@ -41,11 +42,11 @@ public class ProductController {
                               @RequestParam String price,
                               @RequestParam(name = "image") MultipartFile file
                                    ) {
+        logger.info("Start method saveProd");
         Product product = new Product();
         product.setName(name);
         product.setDescription(description);
         product.setPrice(Integer.parseInt(price));
-        logger.info("Start method saveProd");
         logger.info(product.toString());
         String fileName = storageService.store(file);
         logger.info("File Saved");
@@ -58,5 +59,11 @@ public class ProductController {
     public String createProd(Model model) {
         model.addAttribute("product", new Product());
         return "productform";
+    }
+    @PostMapping("/delete")
+    public String delete(@RequestParam String name) {
+       Product product = productService.findByName(name);
+       productService.delete(product);
+       return "delete";
     }
 }

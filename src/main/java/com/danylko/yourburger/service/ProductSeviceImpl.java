@@ -23,10 +23,10 @@ public class ProductSeviceImpl implements ProductService {
     @Override
     @Transactional(readOnly = true)
     public List<Product> findAll() {
-        List<Product> burgers = new ArrayList<>();
+        List<Product> products = new ArrayList<>();
         Iterable<Product> iterable = productRepository.findAll();
-        iterable.forEach(burgers::add);
-        return burgers;
+        iterable.forEach(products::add);
+        return products;
     }
 
     @Override
@@ -36,13 +36,16 @@ public class ProductSeviceImpl implements ProductService {
     }
 
     @Override
-    public Product save(Product burger) {
-        return productRepository.save(burger);
+    public Product findByName(String name) { return productRepository.findByName(name); }
+
+    @Override
+    public Product save(Product product) {
+        return productRepository.save(product);
     }
 
     @Override
-    public void delete(Product burger) {
-        productRepository.delete(burger);
+    public void delete(Product product) {
+        productRepository.delete(product);
     }
 
 }
