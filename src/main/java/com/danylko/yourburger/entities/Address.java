@@ -12,16 +12,16 @@ public class Address implements Serializable {
     @Column(name = "ADDRESS_ID")
     private int addressId;
 
-    @Column(name = "CITY")
+    @Column(name = "CITY", length = 40)
     private String city;
 
-    @Column(name = "STREET")
+    @Column(name = "STREET", length = 100)
     private String street;
 
-    @Column(name = "STREET_NUMBER")
+    @Column(name = "STREET_NUMBER", length = 15)
     private String streetNumber;
 
-    @Column(name = "APARTMENT_NUMBER")
+    @Column(name = "APARTMENT_NUMBER", length = 5)
     private String apartment;
 
     @ManyToOne

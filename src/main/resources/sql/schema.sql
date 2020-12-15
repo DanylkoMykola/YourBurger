@@ -29,7 +29,7 @@ DROP TABLE IF EXISTS ADDRESSES;
 
 CREATE TABLE ADDRESSES (
                            ADDRESS_ID INT NOT NULL AUTO_INCREMENT,
-                           CITY VARCHAR(30),
+                           CITY VARCHAR(40),
                            STREET VARCHAR(60),
                            STREET_NUMBER VARCHAR(10),
                            APARTMENT_NUMBER VARCHAR(5),

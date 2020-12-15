@@ -13,10 +13,10 @@ public class Facility implements Serializable {
     @Column(name = "FAC_ID")
     private int facId;
 
-    @Column(name = "FAC_CITY")
+    @Column(name = "FAC_CITY", length = 40)
     private String facCity;
 
-    @Column(name = "SERVING_CITY")
+    @Column(name = "SERVING_CITY", length = 40)
     private String servingCity;
 
     @OneToOne(mappedBy = "facility")

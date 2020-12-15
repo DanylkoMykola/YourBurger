@@ -14,13 +14,13 @@ public class Customer implements Serializable {
     @Column(name = "CUST_ID")
     private int custId;
 
-    @Column(name = "FIRST_NAME")
+    @Column(name = "FIRST_NAME", length = 40)
     private String fristname;
 
-    @Column(name = "LAST_NAME")
+    @Column(name = "LAST_NAME", length = 40)
     private String lastName;
 
-    @Column(name = "PHONE_NUMBER")
+    @Column(name = "PHONE_NUMBER", length = 25)
     private String phoneNumber;
 
     @Column(name = "EMAIL")
@@ -29,7 +29,7 @@ public class Customer implements Serializable {
     @Column(name = "PASSWORD")
     private String password;
 
-    @Column(name = "RATING")
+    @Column(name = "RATING", length = 2)
     private int rating;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)

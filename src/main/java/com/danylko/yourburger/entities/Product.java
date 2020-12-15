@@ -1,6 +1,7 @@
 package com.danylko.yourburger.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
@@ -15,13 +16,14 @@ public class Product implements Serializable {
     @Column(name = "PROD_ID")
     private Long prodId;
 
-    @Column(name = "NAME")
+    @Column(name = "NAME",length = 60)
+    @Size
     private String name;
 
-    @Column(name = "IMAGE")
+    @Column(name = "IMAGE", length = 50)
     private String image;
 
-    @Column(name = "DESCRIPTION")
+    @Column(name = "DESCRIPTION", length = 1000)
     private String description;
 
     @Column(name = "PRICE")

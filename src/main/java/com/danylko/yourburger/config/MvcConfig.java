@@ -1,5 +1,5 @@
 
-package com.danylko.yourburger;
+package com.danylko.yourburger.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -16,5 +16,10 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("/").setViewName("index");
     }
 
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("*/static/**")
+                .addResourceLocations("classpath:/static/");
+    }
 }
 
