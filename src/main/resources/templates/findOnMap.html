@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Your Burger</title>
+    <link rel="stylesheet" href="../css/logoTopnavFooterstyle.css">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+          integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+          crossorigin=""/>
+</head>
+<body>
+<header>
+    <div class="logo">
+        <a href="index.html"><img class="grafic-logo" src="../img/ybcLogo.png" alt="Logo"></a>
+        <!--   <i class="far fa-clock"><p>пн-чт 11:00-22:00</p><p>пт-сб 11:00-00:00</p><p>нд 11:00-23:00</p></i> -->
+    </div>
+    <nav>
+        <div class="topnav" id="idTopNav">
+            <a href="index.html"><i class="fas fa-hamburger"></i> <span>ЗАМОВИТИ</span></a>
+            <a href="shares.html"><i class="fas fa-gift"></i> <span>АКЦІЇ</span></a>
+            <a class="form-page" href="findOnMap.html"><i class="fas fa-map-marked-alt"></i> <span>МИ НА КАРТІ</span></a>
+            <a href="aboutUs.html"><i class="fas fa-info-circle"></i> <span>ПРО НАС</span></a>
+        </div>
+    </nav>
+</header>
+<div id="mapid" style="width: 90%; height: 400px; position: relative; left: 5%;"
+     class=" leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab
+     leaflet-touch-drag leaflet-touch-zoom" tabindex="0">
+    <div class="leaflet-pane leaflet-map-pane" style="transform: translate3d(0px, 0px, 0px);">
+        <div class="leaflet-pane leaflet-tile-pane"><div class="leaflet-layer " style="z-index: 1; opacity: 1;">
+            <div class="leaflet-tile-container leaflet-zoom-animated" style="z-index: 18;
+             transform: translate3d(0px, 0px, 0px) scale(1);">
+                <img alt="" role="presentation" src="https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/12/2046/1361?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw"
+                     class="leaflet-tile leaflet-tile-loaded" style="width: 512px; height: 512px; transform: translate3d(-200px, -347px, 0px); opacity: 1;">
+                <img alt="" role="presentation" src="https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/12/2047/1361?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw"
+                     class="leaflet-tile leaflet-tile-loaded" style="width: 512px; height: 512px; transform: translate3d(312px, -347px, 0px); opacity: 1;">
+                <img alt="" role="presentation" src="https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/12/2046/1362?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw"
+                     class="leaflet-tile leaflet-tile-loaded" style="width: 512px; height: 512px; transform: translate3d(-200px, 165px, 0px); opacity: 1;">
+                <img alt="" role="presentation" src="https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/12/2047/1362?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw"
+                     class="leaflet-tile leaflet-tile-loaded" style="width: 512px; height: 512px; transform: translate3d(312px, 165px, 0px); opacity: 1;"></div></div></div>
+        <div class="leaflet-pane leaflet-shadow-pane"></div>
+        <div class="leaflet-pane leaflet-overlay-pane"></div>
+        <div class="leaflet-pane leaflet-marker-pane"></div>
+        <div class="leaflet-pane leaflet-tooltip-pane"></div>
+        <div class="leaflet-pane leaflet-popup-pane"></div>
+        <div class="leaflet-proxy leaflet-zoom-animated" style="transform: translate3d(1.04805e+06px, 697379px, 0px) scale(4096);"></div></div>
+    <div class="leaflet-control-container"><div class="leaflet-top leaflet-left"><div class="leaflet-control-zoom leaflet-bar leaflet-control"><a class="leaflet-control-zoom-in" href="#" title="Zoom in" role="button" aria-label="Zoom in">+</a>
+        <a class="leaflet-control-zoom-out" href="#" title="Zoom out" role="button" aria-label="Zoom out">−</a></div></div><div class="leaflet-top leaflet-right"></div><div class="leaflet-bottom leaflet-left"></div>
+        <div class="leaflet-bottom leaflet-right">
+            <div class="leaflet-control-attribution leaflet-control">
+                <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>
+                | Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors,
+                <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>
+                , Imagery © <a href="https://www.mapbox.com/">Mapbox</a></div></div></div></div>
+
+<div class="footer">
+    <a href="https://www.instagram.com/your_burger_coffee/?hl=uk"><i class="fab fa-instagram"></i></a>
+    <a href="https://www.facebook.com/pages/category/Kitchen-Cooking/Your-BurgerCoffee-198081550819879/"><i class="fab fa-facebook-square"></i></a>
+    <div class="telnumber">
+        <p>Стебник: +380680668277</p>
+        <p>Дрогобич: +380680668278</p>
+    </div>
+    <div class="work-schedule">
+        <p>пн-чт 11:00-22:00</p>
+        <p>пт-нд 11:00-00:00</p>
+    </div>
+</div>
+
+
+
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+<script src="../js/findOnMapScript.js"></script>
+</body>
+</html>

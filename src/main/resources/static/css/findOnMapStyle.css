@@ -1,0 +1,92 @@
+#mapid {
+    height: 180px;
+
+}
+element.style {
+    width: 600px;
+    height: 400px;
+    position: absolute;
+}
+.mapStyle {
+    width: 600px;
+    height: 400px;
+    position: relative; left: 30%;
+    display: flex;
+}
+.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom {
+    -ms-touch-action: none;
+    touch-action: none;
+}
+.leaflet-container.leaflet-touch-drag {
+    -ms-touch-action: pinch-zoom;
+    touch-action: none;
+    touch-action: pinch-zoom;
+}
+.leaflet-container.leaflet-touch-zoom {
+    -ms-touch-action: pan-x pan-y;
+    touch-action: pan-x pan-y;
+}
+.leaflet-container {
+    background-image: initial;
+    background-color: rgb(43, 47, 49);
+    outline-color: initial;
+}
+
+.leaflet-container {
+    -webkit-tap-highlight-color: transparent;
+}
+.leaflet-container {
+    font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.leaflet-container {
+    background: #ddd;
+    outline: 0;
+}
+.leaflet-grab {
+    cursor: grab;
+}
+.leaflet-container {
+    -webkit-tap-highlight-color: transparent;
+}
+.leaflet-container {
+    overflow: hidden;
+}
+ * {
+     scrollbar-color: #202324 #454a4d;
+ }
+user agent stylesheet
+div {
+    display: block;
+}
+ html, body, input, textarea, select, button {
+     border-color: #736b5e;
+     color: #e8e6e3;
+ }
+ :root {
+     --darkreader-neutral-background: #181a1b;
+     --darkreader-neutral-text: #e8e6e3;
+     --darkreader-selection-background: #004daa;
+     --darkreader-selection-text: #e8e6e3;
+ }
+ ::-webkit-scrollbar {
+     background-color: #202324;
+     color: #aba499;
+ }
+ ::-webkit-scrollbar-corner {
+     background-color: #181a1b;
+ }
+ ::-webkit-scrollbar-thumb {
+     background-color: #454a4d;
+ }
+ ::selection {
+     background-color: #004daa !important;
+     color: #e8e6e3 !important;
+ }
+@media screen and (max-width: 768px) {
+    .mapStyle {
+        width: 300px;
+        height: 400px;
+        position: absolute;
+        left: 10px;
+    }
+}

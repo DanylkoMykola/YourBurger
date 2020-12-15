@@ -1,0 +1,96 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+a {
+    text-decoration: none;
+}
+li {
+    text-decoration: none;
+    list-style: none;
+}
+body {
+    font-family: 'Raleway', sans-serif;
+    background-color: black;
+}
+.logo {
+    background: yellow;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.grafic-logo {
+    padding: 10px;
+    max-width: 100%;
+    box-sizing: border-box;
+
+}
+nav {
+    margin: auto;
+    width: 100%;
+    height: 100px;
+    text-align: center;
+
+}
+.topnav {
+    background-color: #ff1a1a;
+    font-size: x-large;
+    margin-top: 0px;
+    padding: 15px;
+}
+.topnav a{
+    color: black;
+    text-align: center;
+    padding: 20px 20px;
+}
+.topnav a:first-child {
+    border: none;
+}
+.topnav a:hover {
+    background-color: #cc0000;
+}
+.topnav a:active {
+    background-color: darkred;
+}
+nav div a.form-page {
+    color: yellow;
+}
+
+.footer {
+    margin-top: 30px;
+    background-color: #ff1a1a;
+    padding: 10px;
+    text-align: center;
+
+}
+.footer a {
+    color: yellow;
+    font-size: xx-large;
+    padding: 14px;
+}
+.footer a:hover {
+    background-color: #cc0000;
+
+}
+.telnumber {
+    float: left;
+    width: 300px;
+}
+.work-schedule {
+    float: right;
+    width: 300px;
+}
+
+@media screen and (max-width: 768px) {
+    .topnav a span {
+        display: none;
+    }
+    .telnumber {
+        float: none;
+        width: auto;
+    }
+    .work-schedule {
+        float: none;
+        width: auto;
+    }
+}

@@ -1,0 +1,159 @@
+
+ul {
+    color: #dddddd;
+    margin-left: 10px;
+    font-size: 18px;
+    margin-top: 7%;
+    float: left;
+}
+p i {
+    font-size: x-large;
+
+}
+th,td {
+    padding: 3px;
+}
+button {
+    outline: none;
+}
+button:hover {
+    color: #cc0000;
+}
+button:active {
+    color: gold;
+}
+.order-menu {
+    background-color: #ff1a1a;
+    max-width: 100%;
+    height: 35px;
+    position: sticky;
+    top: 0px;
+    font-size: large;
+    text-align: right;
+    margin-top: -42px;
+    margin-bottom: 25px;
+    padding: 9px;
+
+}
+.order-ref-button {
+    color: black;
+    font-size: large;
+    height: 100%;
+    background-color: #ff1a1a;
+    border: none;
+    padding-left: 20px;
+}
+
+.order-ref-button:hover {
+    color: yellow;
+}
+.order-ref-button:active {
+    color: goldenrod;
+}
+
+.start-end-table-row {
+    background-color: #cc0000;
+}
+.shopping_list {
+    width: 100%;
+    text-align: left;
+}
+
+#cart-content {
+    margin-left: 70%;
+    margin-top: 8px;
+    width: 28%;
+    background-color: #ff1a1a;
+    padding: 5px;
+}
+.advantages-container {
+     display: flex;
+     justify-content: center;
+ }
+.advantages {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+    flex-wrap: wrap;
+}
+.title-burger-box {
+    color: #dddddd;
+    margin-top: 5px;
+    text-align: center;
+}
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 5%;
+}
+.image-box {
+    width: 330px;
+    height: 330px;
+}
+.text-box {
+    float: right;
+    width: 250px;
+    height: 330px;
+}
+.list {
+    width: 100%;
+    height: 70%;
+}
+.price-text {
+    float: left;
+    margin-left: 20px;
+    margin-top: 7px;
+    font-size: x-large;
+    color: #cc0000;
+
+}
+.add-item {
+    background-color: black;
+    color: yellow;
+    float: right;
+    margin-top: 5px;
+    margin-right: 40px;
+    font-size: 40px;
+    border: none;
+}
+
+@media screen and (max-width: 768px) {
+    ul {
+        margin-left: 20px;
+        font-size: 18px;
+        margin-top: 1%;
+        float: left;
+    }
+    .list {
+        height: auto;
+    }
+    .text-box {
+        margin-left: 38px;
+        height: auto;
+    }
+    .advantages {
+        width: 90%;
+        justify-content: center;
+    }
+    span.order-icon {
+        display: none;
+    }
+    #cart-content {
+        margin: auto;
+        width: 80%;
+        margin-top: 8px;
+        background-color: #ff1a1a;
+        padding: 5px;
+    }
+}
+@media screen and (max-width: 420px) {
+
+    .advantages {
+        width: 90%;
+    }
+    span.order-icon {
+        display: none;
+    }
+
+}

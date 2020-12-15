@@ -1,0 +1,48 @@
+
+.header-aboutus {
+    color: #dddddd;
+    margin-left: 20%;
+    margin-right: 20%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+.container-for-image-aboutus {
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.burger-image-aboutus {
+    max-width: 100%;
+    height: auto;
+}
+.text-aboutus {
+    color: #dddddd;
+    margin-left: 20%;
+    margin-right: 20%;
+    text-align: justify;
+    text-indent: 30px;
+    display: flex;
+    justify-content: center;
+}
+@media screen and (max-width: 768px) {
+    .header-aboutus {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .container-for-image-aboutus {
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .burger-image-aboutus {
+        max-width: 100%;
+        height: auto;
+    }
+    .text-aboutus {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}

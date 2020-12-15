@@ -1,0 +1,39 @@
+.header-shares {
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.container-shares {
+    color: #dddddd;
+    background-color: black;
+    margin: 20px 27%;
+    padding: 10px;
+}
+.burger-image-shares {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+}
+.text-shares {
+    margin-left: 25%;
+    margin-right: 25%;
+    text-align: center;
+}
+@media screen and (max-width: 768px) {
+    .header-shares {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .container-shares {
+        margin: 20px 5px;
+    }
+    .text-shares {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .burger-image-shares {
+        width: 100%;
+    }
+}
