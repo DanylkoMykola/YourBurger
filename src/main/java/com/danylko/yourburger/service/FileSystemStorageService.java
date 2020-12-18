@@ -12,6 +12,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -26,20 +27,12 @@ public class FileSystemStorageService implements StorageService {
     Logger logger = LoggerFactory.getLogger(FileSystemStorageService.class);
 
     private final Path rootLocation;
+    private final String defaultImg;
 
     @Autowired
     public FileSystemStorageService(StorageProperties properties) {
         this.rootLocation = Paths.get(properties.getLocation());
-    }
-
-    @Override
-    @PostConstruct
-    public void init() {
-        try {
-            Files.createDirectories(rootLocation);
-        } catch (IOException e) {
-            throw new StorageException("Could not initialize storage location", e);
-        }
+        this.defaultImg = properties.getDefaultImg();
     }
 
     @Override
@@ -71,7 +64,6 @@ public class FileSystemStorageService implements StorageService {
 
     @Override
     public List<String> loadAll(List<Product> products) {
-        //TODO
         for(Product product : products) {
             String fileName =  product.getImage();
             logger.info("File name: " + fileName);
@@ -80,7 +72,7 @@ public class FileSystemStorageService implements StorageService {
                 fullPath = load(fileName);
             }
              else {
-                 fullPath = load("default.jpg");
+                 fullPath = load(defaultImg);
              }
             logger.info("Full path to file: " + fullPath);
             fullPath = fullPath.replace( "\\", "/");
@@ -96,6 +88,5 @@ public class FileSystemStorageService implements StorageService {
         } catch (IOException e) {
             throw new StorageException("Failed to delete file " + fileName, e);
         }
-
     }
 }

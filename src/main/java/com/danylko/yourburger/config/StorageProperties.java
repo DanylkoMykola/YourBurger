@@ -7,6 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class StorageProperties {
 
     private String location;
+    private String defaultImg;
 
     public String getLocation() {
         return location;
@@ -14,6 +15,13 @@ public class StorageProperties {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+    public String getDefaultImg() {
+        return defaultImg;
+    }
+
+    public void setDefaultImg(String defaultImg) {
+        this.defaultImg = defaultImg;
     }
 
 }

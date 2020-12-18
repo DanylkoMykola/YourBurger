@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface StorageService {
 
-    void init();
     String store(MultipartFile multipartFile);
     String load(String fileName);
     List<String> loadAll(List<Product> products);

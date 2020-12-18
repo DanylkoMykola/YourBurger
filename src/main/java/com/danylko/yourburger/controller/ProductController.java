@@ -26,7 +26,7 @@ public class ProductController {
     @Autowired
     private StorageService storageService;
 
-   @GetMapping("/products")
+   @GetMapping({"/", "/products"})
     public String list(Model uiModel) {
         logger.info("Start method list");
         List<Product> products = productService.findAll();
@@ -60,9 +60,10 @@ public class ProductController {
         model.addAttribute("product", new Product());
         return "productform";
     }
-    @PostMapping("/delete")
+    @DeleteMapping("/delete")
     public String delete(@RequestParam String name) {
        Product product = productService.findByName(name);
+       storageService.delete(product.getImage());
        productService.delete(product);
        return "delete";
     }

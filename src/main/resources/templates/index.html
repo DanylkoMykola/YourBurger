@@ -28,7 +28,9 @@
             <div class="text-box">
                 <h2 class="title-burger-box" th:text="${product.name}"></h2>
                 <div class="list">
-                    <p th:text="${product.description}"></p>
+                    <ul  >
+                        <li th:text="${rows}" th:each="rows : ${product.description.split(T(java.lang.System).getProperty('line.separator'))}" ></li>
+                    </ul>
                 </div>
                 <p class="price-text"><span class="burger-price" th:text="${product.price}"></span> грн</p>
                 <button class="add-item" th:attr="data-id=${product.prodId}"><i class="fas fa-plus-square"></i></button>
