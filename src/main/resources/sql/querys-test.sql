@@ -1,5 +1,8 @@
 select * from yourburgerdatabase.products;
 
+delete from products
+where prod_id = 11;
+
 drop table yourburgerdatabase.products;
 drop table yourburgerdatabase.addresses;
 drop table yourburgerdatabase.customers;

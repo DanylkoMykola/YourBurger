@@ -12,7 +12,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -26,13 +25,25 @@ public class FileSystemStorageService implements StorageService {
 
     Logger logger = LoggerFactory.getLogger(FileSystemStorageService.class);
 
-    private final Path rootLocation;
+    private final Path resourceLocation;
+    private final Path uploadFileLocation;
     private final String defaultImg;
 
     @Autowired
     public FileSystemStorageService(StorageProperties properties) {
-        this.rootLocation = Paths.get(properties.getLocation());
+        this.resourceLocation = Paths.get(properties.getResourceLocation());
+        this.uploadFileLocation = Paths.get(properties.getUploadFileLocation());
         this.defaultImg = properties.getDefaultImg();
+    }
+
+    @Override
+    @PostConstruct
+    public void init() {
+        try {
+            Files.createDirectories(uploadFileLocation.toAbsolutePath());
+        } catch (IOException e) {
+            throw new StorageException("Could not initialize storage location", e);
+        }
     }
 
     @Override
@@ -48,7 +59,7 @@ public class FileSystemStorageService implements StorageService {
                                 + fileName);
             }
             try (InputStream inputStream = file.getInputStream()) {
-                Files.copy(inputStream, this.rootLocation.resolve(fileName),
+                Files.copy(inputStream, this.uploadFileLocation.resolve(fileName),
                         StandardCopyOption.REPLACE_EXISTING);
             }
             } catch (IOException e) {
@@ -59,14 +70,13 @@ public class FileSystemStorageService implements StorageService {
 
     @Override
     public String load(String fileName) {
-        return this.rootLocation.resolve(fileName).toString();
+        return this.resourceLocation.resolve(fileName).toString();
     }
 
     @Override
     public List<String> loadAll(List<Product> products) {
         for(Product product : products) {
             String fileName =  product.getImage();
-            logger.info("File name: " + fileName);
             String fullPath;
             if (fileName != null) {
                 fullPath = load(fileName);
@@ -74,8 +84,6 @@ public class FileSystemStorageService implements StorageService {
              else {
                  fullPath = load(defaultImg);
              }
-            logger.info("Full path to file: " + fullPath);
-            fullPath = fullPath.replace( "\\", "/");
             product.setImage(fullPath);
         }
         return null;
@@ -84,9 +92,10 @@ public class FileSystemStorageService implements StorageService {
     @Override
     public void delete(String fileName) {
         try {
-            Files.delete(this.rootLocation.resolve(fileName));
+            Files.delete(this.resourceLocation.resolve(fileName));
         } catch (IOException e) {
             throw new StorageException("Failed to delete file " + fileName, e);
         }
+
     }
 }

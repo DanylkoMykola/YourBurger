@@ -6,16 +6,26 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "storage")
 public class StorageProperties {
 
-    private String location;
+    private String resourceLocation;
+    private String uploadFileLocation;
     private String defaultImg;
 
-    public String getLocation() {
-        return location;
+    public String getResourceLocation() {
+        return resourceLocation;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setResourceLocation(String resourceLocation) {
+        this.resourceLocation = resourceLocation;
     }
+
+    public String getUploadFileLocation() {
+        return uploadFileLocation;
+    }
+
+    public void setUploadFileLocation(String uploadFileLocation) {
+        this.uploadFileLocation = uploadFileLocation;
+    }
+
     public String getDefaultImg() {
         return defaultImg;
     }

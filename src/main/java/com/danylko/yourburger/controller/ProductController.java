@@ -43,12 +43,8 @@ public class ProductController {
                               @RequestParam(name = "image") MultipartFile file
                                    ) {
         logger.info("Start method saveProd");
-        Product product = new Product();
-        product.setName(name);
-        product.setDescription(description);
-        product.setPrice(Integer.parseInt(price));
-        logger.info(product.toString());
         String fileName = storageService.store(file);
+        Product product = new Product(name, fileName, description, Integer.parseInt(price));
         logger.info("File Saved");
         product.setImage(fileName);
         productService.save(product);

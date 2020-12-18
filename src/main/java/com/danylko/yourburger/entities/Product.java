@@ -40,6 +40,16 @@ public class Product implements Serializable {
     )
     private Set<Order> orders = new HashSet<>();
 
+    public Product() {
+    }
+
+    public Product(@Size String name, String image, String description, int price) {
+        this.name = name;
+        this.image = image;
+        this.description = description;
+        this.price = price;
+    }
+
     public Long getProdId() {
         return this.prodId;
     }
