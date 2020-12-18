@@ -5,11 +5,11 @@ import com.danylko.yourburger.service.ProductService;
 import com.danylko.yourburger.service.StorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import java.util.List;
@@ -20,13 +20,15 @@ public class ProductController {
 
     private Logger logger = LoggerFactory.getLogger(ProductController.class);
 
-    @Autowired
-    private ProductService productService;
+    private final ProductService productService;
+    private final StorageService storageService;
 
-    @Autowired
-    private StorageService storageService;
+    public ProductController(ProductService productService, StorageService storageService) {
+        this.productService = productService;
+        this.storageService = storageService;
+    }
 
-   @GetMapping({"/", "/products"})
+    @GetMapping({"/", "/products"})
     public String list(Model uiModel) {
         logger.info("Start method list");
         List<Product> products = productService.findAll();
@@ -36,11 +38,12 @@ public class ProductController {
         return "index";
     }
 
-    @PostMapping("/productform")
+    @PostMapping("/createproduct")
     public String createProd( @RequestParam String name,
                               @RequestParam String description,
                               @RequestParam String price,
-                              @RequestParam(name = "image") MultipartFile file
+                              @RequestParam(name = "image") MultipartFile file,
+                              RedirectAttributes attr
                                    ) {
         logger.info("Start method saveProd");
         String fileName = storageService.store(file);
@@ -48,13 +51,12 @@ public class ProductController {
         logger.info("File Saved");
         product.setImage(fileName);
         productService.save(product);
-        return "productform";
+        return "adminCreateProduct";
     }
 
-    @GetMapping("/productform")
+    @GetMapping("/createproduct")
     public String createProd(Model model) {
-        model.addAttribute("product", new Product());
-        return "productform";
+        return "adminCreateProduct";
     }
     @DeleteMapping("/delete")
     public String delete(@RequestParam String name) {
