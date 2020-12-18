@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>footer</title>
+    <link rel="stylesheet" th:href="@{/css/logoTopnavFooterstyle.css}">
 </head>
 <body>
-<div class="footer">
+<div class="footer" th:fragment="footer">
     <a href="https://www.instagram.com/your_burger_coffee/?hl=uk"><i class="fab fa-instagram"></i></a>
     <a href="https://www.facebook.com/pages/category/Kitchen-Cooking/Your-BurgerCoffee-198081550819879/"><i class="fab fa-facebook-square"></i></a>
     <div class="telnumber">

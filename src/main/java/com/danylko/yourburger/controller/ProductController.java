@@ -33,7 +33,7 @@ public class ProductController {
         storageService.loadAll(products);
         uiModel.addAttribute("products", products);
         logger.info("End method list");
-        return "product";
+        return "index";
     }
 
     @PostMapping("/productform")

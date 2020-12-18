@@ -1,10 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>header</title>
+    <link rel="stylesheet" th:href="@{/css/logoTopnavFooterstyle.css}">
 </head>
 <body>
-
+<header>
+    <div th:fragment="header">
+    <div class="logo">
+        <a th:href="@{products}"><img class="grafic-logo" src="../img/ybcLogo.png" alt="Logo"></a>
+    </div>
+    <nav>
+        <div class="topnav" id="idTopNav">
+            <a class="form-page" th:href="@{products}"><i class="fas fa-hamburger"></i> <span>ЗАМОВИТИ</span></a>
+            <a th:href="@{shares}"><i class="fas fa-gift"></i> <span>АКЦІЇ</span></a>
+            <a th:href="@{map}"><i class="fas fa-map-marked-alt"></i> <span>МИ НА КАРТІ</span></a>
+            <a th:href="@{about}"><i class="fas fa-info-circle"></i> <span>ПРО НАС</span></a>
+        </div>
+    </nav>
+    </div>
+</header>
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </body>
 </html>

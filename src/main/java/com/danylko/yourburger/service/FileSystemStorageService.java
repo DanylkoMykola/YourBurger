@@ -71,6 +71,7 @@ public class FileSystemStorageService implements StorageService {
 
     @Override
     public List<String> loadAll(List<Product> products) {
+        //TODO
         for(Product product : products) {
             String fileName =  product.getImage();
             logger.info("File name: " + fileName);
