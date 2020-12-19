@@ -1,6 +1,7 @@
 package com.danylko.yourburger.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,6 +24,7 @@ public class Customer implements Serializable {
     @Column(name = "PHONE_NUMBER", length = 25)
     private String phoneNumber;
 
+    @Email
     @Column(name = "EMAIL")
     private String email;
 

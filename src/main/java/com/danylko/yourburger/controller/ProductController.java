@@ -47,6 +47,9 @@ public class ProductController {
     @GetMapping("/admin-update")
     public String update() {return "admin-update";}
 
+    @GetMapping("/admin-delete")
+    public String delete() {return "admin-delete";}
+
     @PostMapping("/admin-create")
     public String productForm(@RequestParam String name,
                               @RequestParam String description,
@@ -72,7 +75,7 @@ public class ProductController {
                          RedirectAttributes attributes) {
         Product product = productService.findByName(prodName);
         if (product == null) {
-            attributes.addFlashAttribute("message", "Продукт з такою назвою не існує!");
+            attributes.addFlashAttribute("message", "Продукта з такою назвою не існує!");
             return "redirect:/admin-update";
         }
         if (!name.isEmpty()) {
@@ -86,15 +89,20 @@ public class ProductController {
             product.setImage(fileName);
         }
         productService.save(product);
-        attributes.addFlashAttribute("message", "Дані були продукту змінені!");
+        attributes.addFlashAttribute("message", "Дані продукту були змінені!");
         return "redirect:/admin-update";
     }
 
-    @DeleteMapping("/delete")
-    public String delete(@RequestParam String name) {
+    @PostMapping("admin-delete")
+    public String delete(@RequestParam String name, RedirectAttributes attributes) {
        Product product = productService.findByName(name);
-       storageService.delete(product.getImage());
+        if (product == null) {
+            attributes.addFlashAttribute("message", "Продукта з такою назвою не існує!");
+            return "redirect:/admin-delete";
+        }
+      // storageService.delete(product.getImage());
        productService.delete(product);
-       return "delete";
+       attributes.addFlashAttribute("message", "Продукт стерто!!");
+       return "redirect:/admin-delete";
     }
 }
