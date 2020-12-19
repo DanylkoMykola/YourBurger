@@ -51,7 +51,7 @@ public class FileSystemStorageService implements StorageService {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         try {
             if (file.isEmpty()) {
-                throw new StorageException("Failed to store empty file " + fileName);
+                return defaultImg;
             }
             if (fileName.contains("..")) {
                 throw new StorageException(

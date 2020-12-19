@@ -23,6 +23,7 @@ public class ProductController {
     private final ProductService productService;
     private final StorageService storageService;
 
+
     public ProductController(ProductService productService, StorageService storageService) {
         this.productService = productService;
         this.storageService = storageService;
@@ -38,26 +39,27 @@ public class ProductController {
         return "index";
     }
 
-    @PostMapping("/createproduct")
-    public String createProd( @RequestParam String name,
+    @PostMapping("/admin-create")
+    public String productForm(@RequestParam String name,
                               @RequestParam String description,
                               @RequestParam String price,
                               @RequestParam(name = "image") MultipartFile file,
-                              RedirectAttributes attr
+                              RedirectAttributes attributes
                                    ) {
         logger.info("Start method saveProd");
         String fileName = storageService.store(file);
         Product product = new Product(name, fileName, description, Integer.parseInt(price));
         logger.info("File Saved");
-        product.setImage(fileName);
         productService.save(product);
-        return "adminCreateProduct";
+        attributes.addFlashAttribute("message", "Продукт успішно збережено!");
+        return "redirect:/admin-create";
     }
 
-    @GetMapping("/createproduct")
-    public String createProd(Model model) {
-        return "adminCreateProduct";
+    @GetMapping("/admin-create")
+    public String productForm(Model model) {
+        return "admin-create";
     }
+
     @DeleteMapping("/delete")
     public String delete(@RequestParam String name) {
        Product product = productService.findByName(name);

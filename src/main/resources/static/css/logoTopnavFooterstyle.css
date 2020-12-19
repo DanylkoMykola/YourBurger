@@ -52,7 +52,7 @@ nav {
 .topnav a:active {
     background-color: darkred;
 }
-nav div a.form-page {
+.form-page {
     color: yellow;
 }
 
