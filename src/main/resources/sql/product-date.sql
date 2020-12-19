@@ -2,7 +2,7 @@ insert into yourburgerdatabase.products (NAME, IMAGE, DESCRIPTION, PRICE, VERSIO
                         - Цибуля фіолетова
                         - Маринований огірок
                         - Котлета з яловичини
-                        - Сир чеддер</li>
+                        - Сир чеддер
                         - Яйце смажене на грилі
                         - Секретний соус', 75, 1);
 insert into yourburgerdatabase.products (NAME, IMAGE, DESCRIPTION, PRICE, VERSION) values ('BBQ', 'bbqburger-330x330.jpg', '- Булочка з сезамом

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" th:href="@{/static/css/logoTopnavFooterstyle.css}">
-    <link rel="stylesheet" th:href="@{/static/css/formStyle.css}">
-    <link rel="stylesheet" th:href="@{/static/css/adminForm.css}">
+    <link rel="stylesheet" th:href="@{/css/logoTopnavFooterstyle.css}">
+    <link rel="stylesheet" th:href="@{/css/formStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/adminForm.css}">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap" rel="stylesheet">
     <title>Your Burger</title>
 </head>
@@ -15,7 +15,7 @@
         <p th:text="${message}"></p>
     </div>
     <h3>Змінити продукт:</h3>
-    <form action="#"  method="post" enctype="multipart/form-data">
+    <form action="#" th:action="@{/admin-update}" method="post" enctype="multipart/form-data">
         <div>
             <label for="prodName">Введіть назву продукту який бажаєте змінити</label>
             <input type="text" id="prodName" name="prodName" required>
@@ -42,7 +42,7 @@
             <input type="reset" value="Скинути">
         </div>
     </form>
-
+</div>
     <div th:insert="~{fragments/footer :: footer}">Footer</div>
 </body>
 </html>

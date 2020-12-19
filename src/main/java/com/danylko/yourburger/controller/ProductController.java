@@ -39,6 +39,14 @@ public class ProductController {
         return "index";
     }
 
+    @GetMapping("/admin-create")
+    public String productForm() {
+        return "admin-create";
+    }
+
+    @GetMapping("/admin-update")
+    public String update() {return "admin-update";}
+
     @PostMapping("/admin-create")
     public String productForm(@RequestParam String name,
                               @RequestParam String description,
@@ -54,10 +62,32 @@ public class ProductController {
         attributes.addFlashAttribute("message", "Продукт успішно збережено!");
         return "redirect:/admin-create";
     }
-
-    @GetMapping("/admin-create")
-    public String productForm(Model model) {
-        return "admin-create";
+    //TODO
+    @PostMapping("/admin-update")
+    public String update(@RequestParam(name = "prodName") String prodName,
+                         @RequestParam(name = "name") String name,
+                         @RequestParam(name = "description") String description,
+                         @RequestParam(name = "price") String price,
+                         @RequestParam(name = "image") MultipartFile file,
+                         RedirectAttributes attributes) {
+        Product product = productService.findByName(prodName);
+        if (product == null) {
+            attributes.addFlashAttribute("message", "Продукт з такою назвою не існує!");
+            return "redirect:/admin-update";
+        }
+        if (!name.isEmpty()) {
+            product.setName(name);
+        } else if (!description.isEmpty()) {
+            product.setDescription(description);
+        } else if (!price.isEmpty()) {
+            product.setPrice(Integer.parseInt(price));
+        } else if (file.isEmpty()) {
+            String fileName = storageService.store(file);
+            product.setImage(fileName);
+        }
+        productService.save(product);
+        attributes.addFlashAttribute("message", "Дані були продукту змінені!");
+        return "redirect:/admin-update";
     }
 
     @DeleteMapping("/delete")
