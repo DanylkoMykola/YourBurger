@@ -1,28 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Your Burger</title>
-    <link rel="stylesheet" href="../css/logoTopnavFooterstyle.css">
+    <link rel="stylesheet" th:href="@{/css/logoTopnavFooterstyle.css}">
+    <link rel="stylesheet" th:href="@{/css/aboutUsStyle.css}">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/aboutUsStyle.css">
+
 </head>
 <body>
-<header>
-    <div class="logo">
-        <a href="index.html"><img class="grafic-logo" src="../img/ybcLogo.png" alt="Logo"></a>
-        <!--   <i class="far fa-clock"><p>пн-чт 11:00-22:00</p><p>пт-сб 11:00-00:00</p><p>нд 11:00-23:00</p></i> -->
-    </div>
-    <nav>
-        <div class="topnav" id="idTopNav">
-            <a href="index.html"><i class="fas fa-hamburger"></i> <span>ЗАМОВИТИ</span></a>
-            <a href="shares.html"><i class="fas fa-gift"></i> <span>АКЦІЇ</span></a>
-            <a href="findOnMap.html"><i class="fas fa-map-marked-alt"></i> <span>МИ НА КАРТІ</span></a>
-            <a class="form-page" href="aboutUs.html"><i class="fas fa-info-circle"></i> <span>ПРО НАС</span></a>
-        </div>
-    </nav>
-</header>
+<div th:replace="~{fragments/header :: header}">Header</div>
+
 <h2 class="header-aboutus">Наш секрету успіху простий: "Найсмачніші бургери за найнижчою ціною", - Олег та Софія Лехуш</h2>
 <div class="container-for-image-aboutus">
     <img src="../img/hederAboutUs.jpg" class="burger-image-aboutus" alt="hederAboutUs">
@@ -58,18 +47,8 @@
     а якість при тому – найвищою. Ретельно дотримуємося рецептури класичних бургерів американського стилю.
     Маємо надійних постачальників, у яких наявні усі сертифікати якості.
     А ще – не зупиняємося на досягнутому і продовжуємо самовдосконалюватися.</p>
-<div class="footer">
-    <a href="https://www.instagram.com/your_burger_coffee/?hl=uk"><i class="fab fa-instagram"></i></a>
-    <a href="https://www.facebook.com/pages/category/Kitchen-Cooking/Your-BurgerCoffee-198081550819879/"><i class="fab fa-facebook-square"></i></a>
-    <div class="telnumber">
-        <p>Стебник: +380680668277</p>
-        <p>Дрогобич: +380680668278</p>
-    </div>
-    <div class="work-schedule">
-        <p>пн-чт 11:00-22:00</p>
-        <p>пт-нд 11:00-00:00</p>
-    </div>
-</div>
+
+<div th:insert="~{fragments/footer :: footer}">Footer</div>
 
 
 
