@@ -42,7 +42,7 @@ public class FileSystemStorageService implements StorageService {
         try {
             Files.createDirectories(uploadFileLocation.toAbsolutePath());
         } catch (IOException e) {
-            throw new StorageException("Could not initialize storage location", e);
+            throw new StorageException("Could not initialize storage location ", e);
         }
     }
 
@@ -74,7 +74,7 @@ public class FileSystemStorageService implements StorageService {
     }
 
     @Override
-    public List<String> loadAll(List<Product> products) {
+    public void loadAll(List<Product> products) {
         for(Product product : products) {
             String fileName =  product.getImage();
             String fullPath;
@@ -86,7 +86,6 @@ public class FileSystemStorageService implements StorageService {
              }
             product.setImage(fullPath);
         }
-        return null;
     }
 
     @Override

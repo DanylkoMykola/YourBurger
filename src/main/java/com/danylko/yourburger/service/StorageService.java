@@ -10,6 +10,6 @@ public interface StorageService {
     void init();
     String store(MultipartFile multipartFile);
     String load(String fileName);
-    List<String> loadAll(List<Product> products);
+    void loadAll(List<Product> products);
     void delete(String fileName);
 }
