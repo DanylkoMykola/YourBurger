@@ -1,7 +1,8 @@
-package com.danylko.yourburger.service;
+package com.danylko.yourburger.service.crud;
 
 import com.danylko.yourburger.entities.Product;
 import com.danylko.yourburger.repos.ProductRepository;
+import com.danylko.yourburger.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,7 +12,7 @@ import java.util.List;
 
 @Transactional
 @Service
-public class ProductSeviceImpl implements ProductService {
+public class ProductSeviceCRUDImpl implements ProductService {
 
     private ProductRepository productRepository;
 
@@ -39,13 +40,11 @@ public class ProductSeviceImpl implements ProductService {
     public Product findByName(String name) { return productRepository.findByName(name); }
 
     @Override
-    public Product save(Product product) {
-        return productRepository.save(product);
+    public void save(Product product) {
+        productRepository.save(product);
     }
 
     @Override
-    public void delete(Product product) {
-        productRepository.delete(product);
-    }
+    public void delete(Product product) { productRepository.delete(product); }
 
 }
