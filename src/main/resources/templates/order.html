@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Your Burger</title>
+    <link rel="stylesheet" th:href="@{/css/logoTopnavFooterstyle.css}">
+    <link rel="stylesheet" th:href="@{/css/formStyle.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}">Header</div>
+<div class="form-container">
+
+    <form action="/action_page"> <!--Here input file.java for recive POST-->
+        <div>
+            <div id="cart-result"></div>
+        </div>
+        <div>
+            <label for="fname">Ім'я</label>
+            <input type="text" id="fname" name="firstname" required placeholder="Ваше ім'я">
+        </div>
+        <div>
+            <label for="lname">Прізвище</label>
+            <input type="text" id="lname" name="lastname" required placeholder="Ваше прізвище">
+        </div>
+        <div>
+            <label for="telnum">Номер телефону</label>
+            <input type="text" id="telnum" name="telnum" required pattern="\+380[0-9]{9}|[0-9]{10}" placeholder="+380XXXXXXXXX">
+        </div>
+        <div>
+            <label for="email">Електронна пошта</label>
+            <input type="text" id="email" name="email" required pattern="[a-zA-Z0-9]+@gmail.com" placeholder="example@gmail.com">
+        </div>
+        <div>
+            <label for="country">Населений пункт</label>
+            <select id="country" name="country">
+                <option value="stebnyk">Стебник</option>
+                <option value="drogobych">Дрогобич</option>
+                <option value="truskavect">Трускавець</option>
+                <option value="boryslav">Борислав</option>
+                <option value="dobrogostiv">Доброгостів</option>
+                <option value="ulichne">Уличне</option>
+                <option value="lishnay">Лішня</option>
+                <option value="noveselo">Нове село</option>
+                <option value="modrychy">Модричі</option>
+                <option value="darejechi">Дарежичі</option>
+                <option value="bolehychi">Болехівці</option>
+                <option value="ranevychi">Раневичі</option>
+                <option value="pochaevychi">Почаєвичі</option>
+            </select>
+        </div>
+       <div>
+           <label for="street">Вулиця</label>
+           <input type="text" id="street" name="street" required placeholder="Вкажіть вулицю">
+       </div>
+        <div>
+            <label for="streetnumber">Номер будинку</label>
+            <input type="text" id="streetnumber" name="streetnumber" required placeholder="Вкажіть номер">
+        </div>
+        <div>
+            <label for="apartnum">Номер квартири</label>
+            <input type="text" id="apartnum" name="apartnumber" placeholder="Вкажіть номер">
+        </div>
+        <div>
+            <input type="submit" value="Підтвердити">
+        </div>
+
+
+
+
+
+    </form>
+</div>
+
+<div th:insert="~{fragments/footer :: footer}">Footer</div>
+
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<script src="../static/js/shoppingResultScript.js"></script>
+</body>
+</html>

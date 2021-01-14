@@ -32,17 +32,14 @@ public class ProductController {
 
     @GetMapping({"/", "/products"})
     public String getProductsList(Model uiModel) {
-        logger.info("Start method list");
         List<Product> products = productService.findAll();
         storageService.loadAll(products);
         uiModel.addAttribute("products", products);
-        logger.info(products.toString());
-        logger.info("End method list");
         return "index";
     }
 
     @GetMapping("/admin-create")
-    public String productForm() {
+    public String createProduct() {
         return "admin-create";
     }
 
@@ -53,11 +50,11 @@ public class ProductController {
     public String delete() {return "admin-delete";}
 
     @PostMapping("/admin-create")
-    public String productForm(@RequestParam String name,
-                              @RequestParam String description,
-                              @RequestParam String price,
-                              @RequestParam(name = "image") MultipartFile file,
-                              RedirectAttributes attributes
+    public String createProduct(@RequestParam String name,
+                                @RequestParam String description,
+                                @RequestParam String price,
+                                @RequestParam(name = "image") MultipartFile file,
+                                RedirectAttributes attributes
                                    ) {
         logger.info("Start method saveProd");
         String fileName = storageService.store(file);
