@@ -11,11 +11,11 @@
 <body>
 <div th:replace="~{fragments/header :: header}">Header</div>
 <div class="form-container">
-
+    <div>
+        <div id="cart-result"></div>
+    </div>
     <form action="/action_page"> <!--Here input file.java for recive POST-->
-        <div>
-            <div id="cart-result"></div>
-        </div>
+
         <div>
             <label for="fname">Ім'я</label>
             <input type="text" id="fname" name="firstname" required placeholder="Ваше ім'я">
@@ -76,6 +76,6 @@
 <div th:insert="~{fragments/footer :: footer}">Footer</div>
 
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-<script src="../static/js/shoppingResultScript.js"></script>
+<script src="js/shoppingResult.js"></script>
 </body>
 </html>

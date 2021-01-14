@@ -15,7 +15,7 @@
         <span id="order-amount"> 0</span> x <i class="fas fa-hamburger"></i>
         <button id="clear-cart" class="order-ref-button"><i class="fas fa-times-circle"></i><span class="order-icon"> Очистити кошик</span></button>
         <button id="checkout" class="order-ref-button"> <i class="fas fa-shopping-basket order-icon"></i><span class="order-icon"> Кошик</span> </button>
-        <a id="form-ref" href="order.html" class="order-ref-button"> <i class="fas fa-check-circle"></i><span class="order-icon"> Оформити замовлення</span></a>
+        <a id="form-ref" th:href="@{order}" class="order-ref-button"> <i class="fas fa-check-circle"></i><span class="order-icon"> Оформити замовлення</span></a>
     </p>
     <div id="cart-content"></div>
 </div>
