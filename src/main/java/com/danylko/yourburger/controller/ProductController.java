@@ -5,6 +5,7 @@ import com.danylko.yourburger.service.ProductService;
 import com.danylko.yourburger.service.StorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,17 +25,18 @@ public class ProductController {
     private final StorageService storageService;
 
 
-    public ProductController(ProductService productService, StorageService storageService) {
+    public ProductController(@Qualifier("productServiceJDBC") ProductService productService, StorageService storageService) {
         this.productService = productService;
         this.storageService = storageService;
     }
 
     @GetMapping({"/", "/products"})
-    public String list(Model uiModel) {
+    public String getProductsList(Model uiModel) {
         logger.info("Start method list");
         List<Product> products = productService.findAll();
         storageService.loadAll(products);
         uiModel.addAttribute("products", products);
+        logger.info(products.toString());
         logger.info("End method list");
         return "index";
     }
@@ -80,11 +82,14 @@ public class ProductController {
         }
         if (!name.isEmpty()) {
             product.setName(name);
-        } else if (!description.isEmpty()) {
+        }
+        if (!description.isEmpty()) {
             product.setDescription(description);
-        } else if (!price.isEmpty()) {
+        }
+        if (!price.isEmpty()) {
             product.setPrice(Integer.parseInt(price));
-        } else if (file.isEmpty()) {
+        }
+        if (file.isEmpty()) {
             String fileName = storageService.store(file);
             product.setImage(fileName);
         }

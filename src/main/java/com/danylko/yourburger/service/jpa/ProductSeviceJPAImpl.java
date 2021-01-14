@@ -1,9 +1,10 @@
-package com.danylko.yourburger.service.crud;
+package com.danylko.yourburger.service.jpa;
 
 import com.danylko.yourburger.entities.Product;
 import com.danylko.yourburger.repos.ProductRepository;
 import com.danylko.yourburger.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,7 +13,8 @@ import java.util.List;
 
 @Transactional
 @Service
-public class ProductSeviceCRUDImpl implements ProductService {
+@Qualifier("productServiceJPA")
+public class ProductSeviceJPAImpl implements ProductService {
 
     private ProductRepository productRepository;
 

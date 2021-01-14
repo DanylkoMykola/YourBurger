@@ -43,7 +43,15 @@ public class Product implements Serializable {
     public Product() {
     }
 
-    public Product(@Size String name, String image, String description, int price) {
+    public Product(String name, String image, String description, int price) {
+        this.name = name;
+        this.image = image;
+        this.description = description;
+        this.price = price;
+    }
+
+    public Product(Long prodId , String name, String image, String description, int price) {
+        this.prodId = prodId;
         this.name = name;
         this.image = image;
         this.description = description;
