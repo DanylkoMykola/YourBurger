@@ -31,6 +31,18 @@ public class Address implements Serializable {
     @OneToOne(mappedBy = "address")
     private Order order;
 
+    public Address() {
+    }
+
+    public Address(String city, String street, String streetNumber, String apartment, Customer customer, Order order) {
+        this.city = city;
+        this.street = street;
+        this.streetNumber = streetNumber;
+        this.apartment = apartment;
+        this.customer = customer;
+        this.order = order;
+    }
+
     public int getAddressId() {
         return addressId;
     }

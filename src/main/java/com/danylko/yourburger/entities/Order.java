@@ -45,6 +45,17 @@ public class Order implements Serializable {
     @Column(name = "VERSION")
     private int version;
 
+    public Order() {
+    }
+
+    public Order(Set<Product> products, Facility facility, Customer customer, Address address, int totalPrice) {
+        this.products = products;
+        this.facility = facility;
+        this.customer = customer;
+        this.address = address;
+        this.totalPrice = totalPrice;
+    }
+
     public Set<Product> getProducts() {
         return products;
     }

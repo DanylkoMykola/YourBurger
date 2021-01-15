@@ -40,6 +40,21 @@ public class Customer implements Serializable {
     @OneToOne(mappedBy = "customer")
     private Order order;
 
+    public Customer() {
+    }
+
+    public Customer(String fristname, String lastName, String phoneNumber,
+                    @Email String email, String password, int rating, Set<Address> addresses, Order order) {
+        this.fristname = fristname;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.password = password;
+        this.rating = rating;
+        this.addresses = addresses;
+        this.order = order;
+    }
+
     public int getCustId() {
         return custId;
     }

@@ -44,7 +44,7 @@ CREATE TABLE ORDERS (
                         ADDRESS_ID INT NOT NULL,
                         FAC_ID INT NOT NULL,
                         TOTAL_PRICE INT,
-                        ORDER_DATE TIMESTAMP,
+                        ORDER_DATE TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                         VERSION INT NOT NULL,
                         PRIMARY KEY (ORDER_ID),
                         FOREIGN KEY (CUST_ID) REFERENCES CUSTOMERS(CUST_ID),

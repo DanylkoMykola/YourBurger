@@ -50,6 +50,15 @@ public class Facility implements Serializable {
         this.order = order;
     }
 
+    public Facility() {
+    }
+
+    public Facility(String facCity, String servingCity, Order order) {
+        this.facCity = facCity;
+        this.servingCity = servingCity;
+        this.order = order;
+    }
+
     @Override
     public String toString() {
         return "Facility{" +

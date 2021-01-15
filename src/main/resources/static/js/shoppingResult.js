@@ -29,9 +29,9 @@ function getShoppingResult() {
         sum = 0;
 
     console.log(JSON.stringify(cartData));
-    console.log('Hello pidar');
+
     if (cartData != null) {
-        totalItems = '<table class=><tr "><th>Назва</th><th>Ціна</th><th>кількість</th></tr>';
+        totalItems = '<table class=><tr "><th>Назва</th><th>Ціна</th><th>Кількість</th></tr>';
         for (var items in cartData) {
             totalItems += '<tr>';
             for (var i = 0; i < cartData[items].length; i++) {
