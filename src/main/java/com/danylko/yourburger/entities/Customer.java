@@ -16,7 +16,7 @@ public class Customer implements Serializable {
     private int custId;
 
     @Column(name = "FIRST_NAME", length = 40)
-    private String fristname;
+    private String fristName;
 
     @Column(name = "LAST_NAME", length = 40)
     private String lastName;
@@ -43,9 +43,9 @@ public class Customer implements Serializable {
     public Customer() {
     }
 
-    public Customer(String fristname, String lastName, String phoneNumber,
+    public Customer(String fristName, String lastName, String phoneNumber,
                     @Email String email, String password, int rating, Set<Address> addresses, Order order) {
-        this.fristname = fristname;
+        this.fristName = fristName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.email = email;
@@ -59,8 +59,8 @@ public class Customer implements Serializable {
         return custId;
     }
 
-    public String getFristname() {
-        return fristname;
+    public String getFristName() {
+        return fristName;
     }
 
     public String getLastName() {
@@ -93,8 +93,8 @@ public class Customer implements Serializable {
         this.custId = custId;
     }
 
-    public void setFristname(String fristname) {
-        this.fristname = fristname;
+    public void setFristName(String fristName) {
+        this.fristName = fristName;
     }
 
     public void setLastName(String lastName) {
@@ -137,7 +137,7 @@ public class Customer implements Serializable {
     public String toString() {
         return "Customer{" +
                 "custid=" + custId +
-                ", fristname='" + fristname + '\'' +
+                ", fristname='" + fristName + '\'' +
                 ", surname='" + lastName + '\'' +
                 ", phonenumber='" + phoneNumber + '\'' +
                 ", email='" + email + '\'' +

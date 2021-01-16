@@ -14,29 +14,29 @@
     <div>
         <div id="cart-result"></div>
     </div>
-    <form action="/action_page"> <!--Here input file.java for recive POST-->
+    <form action="#" th:action="@{/order}" method="post" > <!--Here input file.java for recive POST-->
         <div>
             <div id="cart-result-input"></div>
         </div>
         <div>
             <label for="fname">Ім'я</label>
-            <input type="text" id="fname" name="firstname" required placeholder="Ваше ім'я">
+            <input th:type="text" id="fname" name="firstName" required placeholder="Ваше ім'я">
         </div>
         <div>
             <label for="lname">Прізвище</label>
-            <input type="text" id="lname" name="lastname" required placeholder="Ваше прізвище">
+            <input type="text" id="lname"  name="lastname" required placeholder="Ваше прізвище">
         </div>
         <div>
             <label for="telnum">Номер телефону</label>
-            <input type="text" id="telnum" name="telnum" required pattern="\+380[0-9]{9}|[0-9]{10}" placeholder="+380XXXXXXXXX">
+            <input type="text" id="telnum"  name="phoneNumber" required pattern="\+380[0-9]{9}|[0-9]{10}" placeholder="+380XXXXXXXXX">
         </div>
         <div>
             <label for="email">Електронна пошта</label>
-            <input type="text" id="email" name="email" required pattern="[a-zA-Z0-9]+@gmail.com" placeholder="example@gmail.com">
+            <input type="text" id="email"  name="email" required pattern="[a-zA-Z0-9]+@gmail.com" placeholder="example@gmail.com">
         </div>
         <div>
-            <label for="country">Населений пункт</label>
-            <select id="country" name="country">
+            <label for="city">Населений пункт</label>
+            <select id="city" name="city" >
                 <option value="stebnyk">Стебник</option>
                 <option value="drogobych">Дрогобич</option>
                 <option value="truskavect">Трускавець</option>
@@ -54,15 +54,15 @@
         </div>
        <div>
            <label for="street">Вулиця</label>
-           <input type="text" id="street" name="street" required placeholder="Вкажіть вулицю">
+           <input type="text" id="street"  name="street" required placeholder="Вкажіть вулицю">
        </div>
         <div>
             <label for="streetnumber">Номер будинку</label>
-            <input type="text" id="streetnumber" name="streetnumber" required placeholder="Вкажіть номер">
+            <input type="text" id="streetnumber"  name="streetNumber" required placeholder="Вкажіть номер">
         </div>
         <div>
             <label for="apartnum">Номер квартири</label>
-            <input type="text" id="apartnum" name="apartnumber" placeholder="Вкажіть номер">
+            <input type="text" id="apartnum"  name="apartment" placeholder="Вкажіть номер">
         </div>
         <div>
             <input type="submit" value="Підтвердити">
@@ -73,6 +73,6 @@
 <div th:insert="~{fragments/footer :: footer}">Footer</div>
 
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-<script src="js/shoppingResult.js"></script>
+<script th:src="@{js/shoppingResult.js}"></script>
 </body>
 </html>

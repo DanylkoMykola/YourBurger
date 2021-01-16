@@ -1,4 +1,4 @@
-var d = document,
+let d = document,
     itemBox = d.querySelectorAll('.text-box'),
     cartCont = d.getElementById('cart-content'),
     sum = 0,
@@ -8,6 +8,7 @@ getBurgerCount();
 hideOrderButton();
 
 d.getElementById('order-amount').innerHTML = burgerCouter;
+
 function addEvent(elem, type, handler){
     if(elem.addEventListener){
         elem.addEventListener(type, handler, false);
@@ -26,7 +27,7 @@ function setCartData(o){
 
 function addToCart(e){
     this.disabled = true;
-    var cartData = getCartData() || {},
+    let cartData = getCartData() || {},
         parentBox = this.parentNode,
         itemId = this.getAttribute('data-id'), // ID товара
         itemTitle = parentBox.querySelector('.title-burger-box').innerHTML,
@@ -48,21 +49,21 @@ function addToCart(e){
     }
     return false;
 }
-for(var i = 0; i < itemBox.length; i++){
+for(let i = 0; i < itemBox.length; i++){
     addEvent(itemBox[i].querySelector('.add-item'), 'click', addToCart);
 }
 function openCart(e){
 
-    var cartData = getCartData(),
+    let cartData = getCartData(),
         amount = 0,
         sum = 0,
         totalItems = '';
     console.log(JSON.stringify(cartData));
     if(cartData !== null){
         totalItems = '<table class="shopping_list"><tr class="start-end-table-row"><th>Назва</th><th>Ціна</th><th>шт.</th></tr>';
-        for(var items in cartData){
+        for(let items in cartData){
             totalItems += '<tr>';
-            for(var i = 0; i < cartData[items].length; i++){
+            for(let i = 0; i < cartData[items].length; i++){
                 totalItems += '<td>' + cartData[items][i] + '</td>';
                 if (i === 1) {
                    sum += parseInt(cartData[items][i]);
@@ -88,9 +89,9 @@ addEvent(d.getElementById('clear-cart'), 'click', function(e){
     hideOrderButton();
 });
 function getBurgerCount() {
-    var cartData = getCartData();
+    let cartData = getCartData();
     if (cartData !== null) {
-        for (var item in cartData) {
+        for (let item in cartData) {
             burgerCouter += parseInt(cartData[item][2]);
         }
     }
