@@ -28,12 +28,8 @@ function getShoppingResult() {
         cartRes = document.getElementById('cart-result'),
         cartInput = document.getElementById('cart-result-input'),
         sum = 0,
-        cartContentArr = [],
-        cartContent = {
-           name: '',
-           price: 0,
-           count: 0,
-        };
+        cartContentArr = [];
+
 
     console.log(JSON.stringify(cartData));
 
@@ -41,16 +37,26 @@ function getShoppingResult() {
         totalItems = '<table class=><tr "><th>Назва</th><th>Ціна</th><th>Кількість</th></tr>';
         for (let items in cartData) {
             totalItems += '<tr>';
+            let cartContent = {
+                name: '',
+                price: 0,
+                count: 0,
+            };
+            console.log(cartData[items].length);
             for (let i = 0; i < cartData[items].length; i++) {
-                totalItems += '<td>' + cartData[items][i] + '</td>';
-                cartContent.name = cartData[items][i];
-                if (i === 1) {
-                    sum += parseInt(cartData[items][i]);
-                    cartContent.price = cartData[items][i];
+                let cartTmp = cartData[items][i];
+                totalItems += '<td>' + cartTmp + '</td>';
+                
+                if (i === 0) {
+                    cartContent.name = cartTmp;
                 }
+                if (i === 1) {
+                    sum += parseInt(cartTmp);
+                    cartContent.price = cartTmp;
+                }
+
                 if (i === 2) {
-                    totalItems += '<td>' + cartData[items][i] + '</td>';
-                    cartContent.count = cartData[items][i]
+                    cartContent.count = cartTmp
                 }
             }
             totalItems += '</tr>';
@@ -58,7 +64,8 @@ function getShoppingResult() {
         }
         totalItems += '<tr class="cart-result-table-row"><td>Разом</td><td>' + sum + '</td><td>'+ burgerCount +'</td></tr>';
         totalItems += '</table>';
-        inputItems = '<input type="hidden" id="order-list" name="orderList" value="' + JSON.stringify(cartContentArr) + '" >';
+        inputItems = '<input type="hidden" id="order-list" name="orderList" value="'
+            + JSON.stringify(cartContentArr).replace(/"/g, '&qout') + '" >';
         cartRes.innerHTML = totalItems;
         cartInput.innerHTML = inputItems;
     } else {

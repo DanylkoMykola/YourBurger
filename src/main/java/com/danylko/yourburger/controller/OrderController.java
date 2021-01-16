@@ -43,12 +43,15 @@ public class OrderController {
                             @RequestParam String streetNumber,
                             @RequestParam String apartment) {
 
+        logger.info(orderList);
+        //List<ProductOrder> productOrderList = productOrderMapper.getProductOrderList(orderList);
+       // logger.info(productOrderList.toString());
       /*  model.addAttribute("customer", customer);
         model.addAttribute("address", address);
 
         logger.info(customer.toString());
         logger.info(address.toString());
-        logger.info(orderList.toString());*/
-        return "order";
+        */
+        return "index";
     }
 }

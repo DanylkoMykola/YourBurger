@@ -1,12 +1,13 @@
 package com.danylko.yourburger.entities;
 
-import java.util.List;
-
 public class ProductOrder {
 
     private String name;
     private int price;
-    private int amount;
+    private int count;
+
+    public ProductOrder() {
+    }
 
     public String getName() {
         return name;
@@ -24,12 +25,12 @@ public class ProductOrder {
         this.price = price;
     }
 
-    public int getAmount() {
-        return amount;
+    public int getCount() {
+        return count;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
+    public void setCount(int count) {
+        this.count = count;
     }
 
     @Override
@@ -37,7 +38,7 @@ public class ProductOrder {
         return "ProductOrder{" +
                 "name='" + name + '\'' +
                 ", price=" + price +
-                ", amount=" + amount +
+                ", amount=" + count +
                 '}';
     }
 }

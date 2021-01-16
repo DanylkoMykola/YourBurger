@@ -4,6 +4,7 @@ import com.danylko.yourburger.entities.Product;
 import com.danylko.yourburger.entities.ProductOrder;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.CollectionType;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -14,15 +15,16 @@ import java.util.Map;
 public class ProductOrderMapper {
 
 
-    public Map<String, String> getProductOrderList(String jsonStr)  {
-        Map<String, String> stringMap = null;
+    public List<ProductOrder> getProductOrderList(String jsonStr)  {
+        List<ProductOrder> productOrderList = null;
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            stringMap = objectMapper.readValue(jsonStr, new TypeReference<Map<String, String>>() {
-            });
+            CollectionType javaTypes = objectMapper.getTypeFactory()
+                    .constructCollectionType(List.class, ProductOrder.class);
+            productOrderList = objectMapper.readValue(jsonStr, javaTypes);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return stringMap;
+        return productOrderList;
     }
 }
