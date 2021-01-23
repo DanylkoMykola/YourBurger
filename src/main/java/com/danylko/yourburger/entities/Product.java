@@ -109,6 +109,18 @@ public class Product implements Serializable {
         this.productOrderSet = productOrderSet;
     }
 
+    public void setProdId(Long prodId) {
+        this.prodId = prodId;
+    }
+
+    public Set<ProductOrder> getProductOrderSet() {
+        return productOrderSet;
+    }
+
+    public void setProductOrderSet(Set<ProductOrder> productOrderSet) {
+        this.productOrderSet = productOrderSet;
+    }
+
     @Override
     public String toString() {
         return "Product{" +

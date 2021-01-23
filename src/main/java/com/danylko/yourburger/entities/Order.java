@@ -84,10 +84,6 @@ public class Order implements Serializable {
         return version;
     }
 
-    public void setProductOrders(Set<ProductOrder> products) {
-        this.productOrderSet = productOrderSet;
-    }
-
     public void setFacility(Facility facility) {
         this.facility = facility;
     }
@@ -110,6 +106,22 @@ public class Order implements Serializable {
 
     public void setVersion(int version) {
         this.version = version;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
+    public Set<ProductOrder> getProductOrderSet() {
+        return productOrderSet;
+    }
+
+    public void setProductOrderSet(Set<ProductOrder> productOrderSet) {
+        this.productOrderSet = productOrderSet;
     }
 
     @Override

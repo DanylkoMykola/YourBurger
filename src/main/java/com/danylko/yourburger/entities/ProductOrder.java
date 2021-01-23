@@ -1,15 +1,15 @@
 package com.danylko.yourburger.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "product_list")
 public class ProductOrder {
 
-    @Column(name = "ORDER_ID")
-    private int orderId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "PROD_LIST_ID")
+    private Long prodListId;
 
     @Column(name = "NAME")
     private String name;
@@ -21,7 +21,7 @@ public class ProductOrder {
     private int count;
 
     @ManyToOne
-    @JoinColumn(name = "NAME")
+    @JoinColumn(name = "PROD_ID")
     private Product product;
 
     @ManyToOne
@@ -55,10 +55,34 @@ public class ProductOrder {
         this.count = count;
     }
 
+    public Long getProdListId() {
+        return prodListId;
+    }
+
+    public void setProdListId(Long prodListId) {
+        this.prodListId = prodListId;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+
     @Override
     public String toString() {
         return "ProductOrder{" +
-                "name='" + name + '\'' +
                 ", price=" + price +
                 ", amount=" + count +
                 '}';
