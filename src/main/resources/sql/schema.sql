@@ -7,7 +7,8 @@ CREATE TABLE  PRODUCTS (
                          DESCRIPTION VARCHAR(1000),
                          PRICE INT NOT NULL,
                          VERSION INT NOT NULL,
-                         PRIMARY KEY (PROD_ID)
+                         PRIMARY KEY (PROD_ID),
+                         PRIMARY KEY (NAME)
 );
 
 DROP TABLE IF EXISTS CUSTOMERS;
@@ -42,7 +43,7 @@ CREATE TABLE ORDERS (
                         ORDER_ID INT NOT NULL AUTO_INCREMENT,
                         CUST_ID INT NOT NULL,
                         ADDRESS_ID INT NOT NULL,
-                        FAC_ID INT NOT NULL,
+                        FAC_ID INT,
                         TOTAL_PRICE INT,
                         ORDER_DATE TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                         VERSION INT NOT NULL,
@@ -65,9 +66,9 @@ DROP TABLE IF EXISTS PRODUCT_LIST;
 
 CREATE TABLE PRODUCT_LIST (
     ORDER_ID INT NOT NULL,
-    PROD_ID INT NOT NULL,
+    NAME INT NOT NULL,
     AMOUNT INT,
     FOREIGN KEY (ORDER_ID) REFERENCES ORDERS(ORDER_ID),
-    FOREIGN KEY (PROD_ID) REFERENCES PRODUCTS(PROD_ID)
+    FOREIGN KEY (NAME) REFERENCES PRODUCTS(NAME)
 );
 

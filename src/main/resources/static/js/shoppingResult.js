@@ -24,9 +24,11 @@ function getShoppingResult() {
     let cartData = getCartData(),
         totalItems = '',
         inputItems = '',
+        inputSum = '',
         burgerCount = getBurgerCount(),
         cartRes = document.getElementById('cart-result'),
         cartInput = document.getElementById('cart-result-input'),
+        cartSumInput =document.getElementById('cart-sum-input'),
         sum = 0,
         cartContentArr = [];
 
@@ -42,11 +44,10 @@ function getShoppingResult() {
                 price: 0,
                 count: 0,
             };
-            console.log(cartData[items].length);
             for (let i = 0; i < cartData[items].length; i++) {
                 let cartTmp = cartData[items][i];
                 totalItems += '<td>' + cartTmp + '</td>';
-                
+
                 if (i === 0) {
                     cartContent.name = cartTmp;
                 }
@@ -65,12 +66,15 @@ function getShoppingResult() {
         totalItems += '<tr class="cart-result-table-row"><td>Разом</td><td>' + sum + '</td><td>'+ burgerCount +'</td></tr>';
         totalItems += '</table>';
         inputItems = '<input type="hidden" id="order-list" name="orderList" value="'
-            + JSON.stringify(cartContentArr).replace(/"/g, '&qout') + '" >';
+            + JSON.stringify(cartContentArr).replace(/"/g, '&quot;') + '" >';
+        inputSum = '<input type="hidden" id="sum" name="sum" value="' + sum +'">';
         cartRes.innerHTML = totalItems;
         cartInput.innerHTML = inputItems;
+        cartSumInput.innerHTML = inputSum;
     } else {
         cartRes.innerHTML = '';
         cartInput.innerHTML = '';
+        cartSumInput.innerHTML = '';
     }
     return false;
 }

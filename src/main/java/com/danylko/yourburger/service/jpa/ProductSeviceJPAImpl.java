@@ -35,7 +35,7 @@ public class ProductSeviceJPAImpl implements ProductService {
     @Override
     @Transactional(readOnly = true)
     public Product findById(Long id) {
-        return productRepository.findById(id).get();
+        return productRepository.findById(id).orElse(null);
     }
 
     @Override

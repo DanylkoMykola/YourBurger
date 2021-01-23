@@ -36,7 +36,7 @@ public class Product implements Serializable {
     @ManyToMany
     @JoinTable(name = "product_list",
             joinColumns = @JoinColumn(name = "ORDER_ID"),
-            inverseJoinColumns = @JoinColumn(name = "PROD_ID")
+            inverseJoinColumns = @JoinColumn(name = "NAME")
     )
     private Set<Order> orders = new HashSet<>();
 
