@@ -1,6 +1,9 @@
 package com.danylko.yourburger.controller;
 
-import com.danylko.yourburger.entities.ProductOrder;
+import com.danylko.yourburger.entities.Address;
+import com.danylko.yourburger.entities.Customer;
+import com.danylko.yourburger.entities.Order;
+import com.danylko.yourburger.entities.Product;
 import com.danylko.yourburger.service.ProductOrderMapperImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
+import java.util.Set;
 
 @Controller
 public class OrderController {
@@ -38,12 +41,11 @@ public class OrderController {
                             @RequestParam String apartment) {
 
        // logger.info(orderList);
-        List<ProductOrder> productOrderList = productOrderMapper.getProductOrderList(orderList);
+        Set<Product> productOrderList = productOrderMapper.getProductOrderList(orderList);
         //logger.info(productOrderList.toString());
-
-
-
-
+        Address address = new Address(city, street, streetNumber, apartment);
+        Customer customer = new Customer(firstName, lastName, phoneNumber, email);
+        Order order = new Order(productOrderList, null, customer, address, Integer.parseInt(sum));
         logger.info(customer.toString());
         logger.info(address.toString());
 

@@ -13,7 +13,7 @@ public class Customer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CUST_ID")
-    private int custId;
+    private Long custId;
 
     @Column(name = "FIRST_NAME", length = 40)
     private String fristName;
@@ -37,14 +37,22 @@ public class Customer implements Serializable {
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Address> addresses = new HashSet<>();
 
-    @OneToOne(mappedBy = "customer")
-    private Order order;
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Order> orders;
 
     public Customer() {
     }
 
     public Customer(String fristName, String lastName, String phoneNumber,
-                    @Email String email, String password, int rating, Set<Address> addresses, Order order) {
+                    @Email String email) {
+        this.fristName = fristName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+    }
+
+    public Customer(String fristName, String lastName, String phoneNumber, @Email String email,
+                    String password, int rating, Set<Address> addresses, Set<Order> orders) {
         this.fristName = fristName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
@@ -52,10 +60,10 @@ public class Customer implements Serializable {
         this.password = password;
         this.rating = rating;
         this.addresses = addresses;
-        this.order = order;
+        this.orders = orders;
     }
 
-    public int getCustId() {
+    public Long getCustId() {
         return custId;
     }
 
@@ -83,13 +91,13 @@ public class Customer implements Serializable {
         return rating;
     }
 
-    public Order getOrder() { return this.order; }
+    public Set<Order> getOrders() { return this.orders; }
 
     public Set<Address> getAddresses() {
         return addresses;
     }
 
-    public void setCustId(int custId) {
+    public void setCustId(Long custId) {
         this.custId = custId;
     }
 
@@ -118,7 +126,7 @@ public class Customer implements Serializable {
         this.rating = rating;
     }
 
-    public void setOrder(Order order) { this.order = order; }
+    public void setOrders(Set<Order> orders) { this.orders = orders; }
 
     public void setAddresses(Set<Address> addresses) {
         this.addresses = addresses;

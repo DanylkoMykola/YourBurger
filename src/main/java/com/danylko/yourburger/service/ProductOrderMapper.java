@@ -1,10 +1,10 @@
 package com.danylko.yourburger.service;
 
-import com.danylko.yourburger.entities.ProductOrder;
+import com.danylko.yourburger.entities.Product;
 
-import java.util.List;
+import java.util.Set;
 
 public interface ProductOrderMapper {
 
-    List<ProductOrder> getProductOrderList(String jsonStr);
+    Set<Product> getProductOrderList(String jsonStr);
 }

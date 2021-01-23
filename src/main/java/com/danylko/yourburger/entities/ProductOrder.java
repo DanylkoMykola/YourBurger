@@ -1,9 +1,21 @@
 package com.danylko.yourburger.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+@Entity
 public class ProductOrder {
 
+    @Column(name = "ORDER_ID")
+    private int orderId;
+
+    @Column(name = "NAME")
     private String name;
+
+    @Column(name = "PRICE")
     private int price;
+
+    @Column(name = "COUNT")
     private int count;
 
     public ProductOrder() {
