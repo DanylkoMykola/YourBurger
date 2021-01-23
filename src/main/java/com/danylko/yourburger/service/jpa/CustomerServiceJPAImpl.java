@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Transactional
 @Service
@@ -23,8 +21,8 @@ public class CustomerServiceJPAImpl implements CustomerService {
     }
 
     @Override
-    public List<Customer> findAll() {
-        List<Customer> customers = new ArrayList<>();
+    public Set<Customer> findAll() {
+        Set<Customer> customers = new HashSet<>();
         Iterable<Customer> iterable = customerRepository.findAll();
         iterable.forEach(customers::add);
         return customers;

@@ -2,10 +2,10 @@ package com.danylko.yourburger.service;
 
 import com.danylko.yourburger.entities.Customer;
 
-import java.util.List;
+import java.util.Set;
 
 public interface CustomerService {
-    List<Customer> findAll();
+    Set<Customer> findAll();
     Customer findById(Long id);
     Customer findByPhoneNumber(String phoneNumber);
     void save(Customer customer);

@@ -15,18 +15,18 @@ public class Order implements Serializable {
     @Column(name = "ORDER_ID")
     private int orderId;
 
-    @ManyToMany
-    @JoinTable(name = "product_list",
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    /*@JoinTable(name = "product_list",
             joinColumns = @JoinColumn(name = "ORDER_ID"),
             inverseJoinColumns = @JoinColumn(name = "NAME")
-    )
-    private Set<Product> products = new HashSet<>();
+    )*/
+    private Set<ProductOrder> productOrderSet = new HashSet<>();
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "FAC_ID")
     private Facility facility;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "CUST_ID")
     private Customer customer;
 
@@ -48,16 +48,16 @@ public class Order implements Serializable {
     public Order() {
     }
 
-    public Order(Set<Product> products, Facility facility, Customer customer, Address address, int totalPrice) {
-        this.products = products;
+    public Order(Set<ProductOrder> productOrderSet, Facility facility, Customer customer, Address address, int totalPrice) {
+        this.productOrderSet = productOrderSet;
         this.facility = facility;
         this.customer = customer;
         this.address = address;
         this.totalPrice = totalPrice;
     }
 
-    public Set<Product> getProducts() {
-        return products;
+    public Set<ProductOrder> getProductOrders() {
+        return productOrderSet;
     }
 
     public Facility getFacility() {
@@ -84,8 +84,8 @@ public class Order implements Serializable {
         return version;
     }
 
-    public void setProducts(Set<Product> products) {
-        this.products = products;
+    public void setProductOrders(Set<ProductOrder> products) {
+        this.productOrderSet = productOrderSet;
     }
 
     public void setFacility(Facility facility) {
@@ -116,7 +116,7 @@ public class Order implements Serializable {
     public String toString() {
         return "Order{" +
                 "orderId=" + orderId +
-                ", products=" + products +
+                ", productOrderSet=" + productOrderSet +
                 ", facility=" + facility +
                 ", customer=" + customer +
                 ", address=" + address +

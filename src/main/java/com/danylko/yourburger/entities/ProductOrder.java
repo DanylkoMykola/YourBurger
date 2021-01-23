@@ -2,6 +2,8 @@ package com.danylko.yourburger.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class ProductOrder {
@@ -17,6 +19,14 @@ public class ProductOrder {
 
     @Column(name = "COUNT")
     private int count;
+
+    @ManyToOne
+    @JoinColumn(name = "NAME")
+    private Product product;
+
+    @ManyToOne
+    @JoinColumn(name = "ORDER_ID")
+    private Order order;
 
     public ProductOrder() {
     }

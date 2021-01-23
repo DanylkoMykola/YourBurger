@@ -25,7 +25,7 @@ public class Address implements Serializable {
     private String apartment;
 
     @ManyToOne
-    @JoinColumn(name = "CUST_ID")
+    @JoinColumn( name = "CUST_ID")
     private Customer customer;
 
     @OneToOne(mappedBy = "address")

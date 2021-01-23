@@ -1,9 +1,6 @@
 package com.danylko.yourburger.controller;
 
-import com.danylko.yourburger.entities.Address;
-import com.danylko.yourburger.entities.Customer;
-import com.danylko.yourburger.entities.Order;
-import com.danylko.yourburger.entities.Product;
+import com.danylko.yourburger.entities.*;
 import com.danylko.yourburger.service.ProductOrderMapperImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +38,7 @@ public class OrderController {
                             @RequestParam String apartment) {
 
        // logger.info(orderList);
-        Set<Product> productOrderList = productOrderMapper.getProductOrderList(orderList);
+        Set<ProductOrder> productOrderList = productOrderMapper.getProductOrderList(orderList);
         //logger.info(productOrderList.toString());
         Address address = new Address(city, street, streetNumber, apartment);
         Customer customer = new Customer(firstName, lastName, phoneNumber, email);
