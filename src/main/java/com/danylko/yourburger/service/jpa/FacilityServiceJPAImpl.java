@@ -7,8 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Transactional
 @Service
@@ -22,8 +23,8 @@ public class FacilityServiceJPAImpl implements FacilityService {
     }
 
     @Override
-    public Set<Facility> findAll() {
-        Set<Facility> facilities = new HashSet<>();
+    public List<Facility> findAll() {
+        List<Facility> facilities = new ArrayList<>();
         Iterable<Facility> iterable = facilityRepository.findAll();
         iterable.forEach(facilities::add);
         return facilities;

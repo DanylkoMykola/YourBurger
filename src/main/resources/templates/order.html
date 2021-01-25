@@ -39,20 +39,10 @@
         </div>
         <div>
             <label for="city">Населений пункт</label>
-            <select id="city" name="city" >
-                <option value="stebnyk">Стебник</option>
-                <option value="drogobych">Дрогобич</option>
-                <option value="truskavect">Трускавець</option>
-                <option value="boryslav">Борислав</option>
-                <option value="dobrogostiv">Доброгостів</option>
-                <option value="ulichne">Уличне</option>
-                <option value="lishnay">Лішня</option>
-                <option value="noveselo">Нове село</option>
-                <option value="modrychy">Модричі</option>
-                <option value="darejechi">Дарежичі</option>
-                <option value="bolehychi">Болехівці</option>
-                <option value="ranevychi">Раневичі</option>
-                <option value="pochaevychi">Почаєвичі</option>
+            <select id="city" >
+                <option th:each="facility : ${facilities}"
+                        th:value="${facility.servingCity}"
+                        th:text="${facility.servingCity}"></option>
             </select>
         </div>
        <div>

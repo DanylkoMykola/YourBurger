@@ -55,4 +55,18 @@ insert into yourburgerdatabase.products (NAME, IMAGE, DESCRIPTION, PRICE, VERSIO
                         - Бекон
                         - Соус Х', 64, 1);
 
+insert into yourburgerdatabase.facilities (fac_city, serving_city) VALUES ('Стебник-1', 'Стебник'),
+                                                                          ('Стебник-1', 'Доброгостів'),
+                                                                          ('Стебник-1', 'Уличне'),
+                                                                          ('Стебник-1', 'Болехівці'),
+                                                                          ('Стебник-1', 'Трускавець'),
+                                                                          ('Стебник-1', 'Борислав');
+
+insert into yourburgerdatabase.facilities (fac_city, serving_city) VALUES ('Дрогобич-1', 'Дрогобич'),
+                                                                          ('Дрогобич-1', 'Лішня'),
+                                                                          ('Дрогобич-1', 'Нове село'),
+                                                                          ('Дрогобич-1', 'Модричі'),
+                                                                          ('Дрогобич-1', 'Дережичі'),
+                                                                          ('Дрогобич-1', 'Раневичі'),
+                                                                          ('Дрогобич-1', 'Почаєвичі');
 

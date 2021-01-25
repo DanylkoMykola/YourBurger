@@ -1,5 +1,7 @@
 select * from yourburgerdatabase.products;
 
+select * from facilities where serving_city='Стебник';
+
 delete from products
 where prod_id = 12;
 

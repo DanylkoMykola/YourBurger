@@ -50,8 +50,13 @@ public class Facility implements Serializable {
         this.order = order;
     }
 
+    public void setFacId(Long facId) {
+        this.facId = facId;
+    }
     public Facility() {
     }
+
+
 
     public Facility(String facCity, String servingCity, Order order) {
         this.facCity = facCity;
