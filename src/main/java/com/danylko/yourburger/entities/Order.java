@@ -56,10 +56,11 @@ public class Order implements Serializable {
     public Order() {
     }
 
-    public Order(List<ProductOrder> productOrderList, Facility facility, Customer customer, Address address, int totalPrice) {
+    public Order(List<ProductOrder> productOrderList, Facility facility, Customer customer, Date orderDate, Address address, int totalPrice) {
         this.productOrderList = productOrderList;
         this.facility = facility;
         this.customer = customer;
+        this.orderDate=orderDate;
         this.address = address;
         this.totalPrice = totalPrice;
     }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -48,9 +49,10 @@ public class OrderController {
         logger.info(productOrderList.toString());
         Address address = new Address(city, street, streetNumber, apartment);
         Customer customer = new Customer(firstName, lastName, phoneNumber, email);
-        //customer.addAddress(address);
+
+
         logger.info(customer.toString());
-        Order order = new Order(productOrderList, null, customer, address, Integer.parseInt(sum));
+        Order order = new Order(productOrderList, null, customer, new Date(), address, Integer.parseInt(sum));
 
         logger.info(address.toString());
         logger.info(order.toString());

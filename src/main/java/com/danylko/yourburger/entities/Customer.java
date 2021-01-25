@@ -27,11 +27,11 @@ public class Customer implements Serializable {
     @Column(name = "LAST_NAME", length = 40)
     private String lastName;
 
-    @Column(name = "PHONE_NUMBER", length = 25)
+    @Column(name = "PHONE_NUMBER", length = 25, unique = true)
     private String phoneNumber;
 
     @Email
-    @Column(name = "EMAIL")
+    @Column(name = "EMAIL", unique = true)
     private String email;
 
     @Column(name = "PASSWORD")
