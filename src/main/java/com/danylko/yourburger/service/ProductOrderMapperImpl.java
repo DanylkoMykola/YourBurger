@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+import java.util.List;
 import java.util.Set;
 
 
@@ -15,12 +16,12 @@ import java.util.Set;
 public class ProductOrderMapperImpl implements ProductOrderMapper {
 
 
-    public Set<ProductOrder> getProductOrderList(String jsonStr)  {
-        Set<ProductOrder> productOrderList = null;
+    public List<ProductOrder> getProductOrderList(String jsonStr)  {
+        List<ProductOrder> productOrderList = null;
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             CollectionType javaTypes = objectMapper.getTypeFactory()
-                    .constructCollectionType(Set.class, ProductOrder.class);
+                    .constructCollectionType(List.class, ProductOrder.class);
             productOrderList = objectMapper.readValue(jsonStr, javaTypes);
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,5 +1,8 @@
 package com.danylko.yourburger.entities;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -9,8 +12,12 @@ public class Address implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    /*, generator = "address-generator"
+    @TableGenerator(name = "address-generator",
+    table = "addresses",
+    pkColumnName = "ADDRESS_ID")*/
     @Column(name = "ADDRESS_ID")
-    private int addressId;
+    private Long addressId;
 
     @Column(name = "CITY", length = 40)
     private String city;
@@ -24,9 +31,9 @@ public class Address implements Serializable {
     @Column(name = "APARTMENT_NUMBER", length = 5)
     private String apartment;
 
-    @ManyToOne
+   /* @ManyToOne
     @JoinColumn( name = "CUST_ID")
-    private Customer customer;
+    private Customer customer;*/
 
     @OneToOne(mappedBy = "address")
     private Order order;
@@ -41,16 +48,16 @@ public class Address implements Serializable {
         this.apartment = apartment;
     }
 
-    public Address(String city, String street, String streetNumber, String apartment, Customer customer, Order order) {
+    public Address(String city, String street, String streetNumber, String apartment, Order order) {
         this.city = city;
         this.street = street;
         this.streetNumber = streetNumber;
         this.apartment = apartment;
-        this.customer = customer;
+       // this.customer = customer;
         this.order = order;
     }
 
-    public int getAddressId() {
+    public Long getAddressId() {
         return addressId;
     }
 
@@ -70,15 +77,11 @@ public class Address implements Serializable {
         return apartment;
     }
 
-    public Customer getCustomer() {
+   /* public Customer getCustomer() {
         return customer;
-    }
+    }*/
 
     public Order getOrder() { return this.order; }
-
-    public void setAddressId(int addressId) {
-        this.addressId = addressId;
-    }
 
     public void setCity(String city) {
         this.city = city;
@@ -96,9 +99,9 @@ public class Address implements Serializable {
         this.apartment = apartment;
     }
 
-    public void setCustomer(Customer customer) {
+   /* public void setCustomer(Customer customer) {
         this.customer = customer;
-    }
+    }*/
 
     public void setOrder(Order order) { this.order = order; }
 
@@ -111,7 +114,7 @@ public class Address implements Serializable {
                 ", street='" + street + '\'' +
                 ", streetnumber='" + streetNumber + '\'' +
                 ", apartment='" + apartment + '\'' +
-                ", customer=" + customer +
+               // ", customer=" + customer +
                 '}';
     }
 }

@@ -1,9 +1,11 @@
 package com.danylko.yourburger.entities;
 
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -12,6 +14,10 @@ public class Customer implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+   /* , generator = "customer-generator"
+    @TableGenerator(name = "customer-generator",
+            table = "customers",
+            pkColumnName = "CUST_ID")*/
     @Column(name = "CUST_ID")
     private Long custId;
 
@@ -34,11 +40,11 @@ public class Customer implements Serializable {
     @Column(name = "RATING", length = 2)
     private int rating;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Address> addresses = new HashSet<>();
+   /* @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Address> addresses;*/
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Order> orders;
+    private List<Order> orders;
 
     public Customer() {
     }
@@ -52,18 +58,18 @@ public class Customer implements Serializable {
     }
 
     public Customer(String fristName, String lastName, String phoneNumber, @Email String email,
-                    String password, int rating, Set<Address> addresses, Set<Order> orders) {
+                    String password, int rating, List<Order> orders) {
         this.fristName = fristName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.password = password;
         this.rating = rating;
-        this.addresses = addresses;
+        //this.addresses = addresses;
         this.orders = orders;
     }
 
-    public Long getCustId() {
+    public long getCustId() {
         return custId;
     }
 
@@ -91,13 +97,13 @@ public class Customer implements Serializable {
         return rating;
     }
 
-    public Set<Order> getOrders() { return this.orders; }
+    public List<Order> getOrders() { return this.orders; }
 
-    public Set<Address> getAddresses() {
+   /* public List<Address> getAddresses() {
         return addresses;
-    }
+    }*/
 
-    public void setCustId(Long custId) {
+    public void setCustId(long custId) {
         this.custId = custId;
     }
 
@@ -126,9 +132,9 @@ public class Customer implements Serializable {
         this.rating = rating;
     }
 
-    public void setOrders(Set<Order> orders) { this.orders = orders; }
+    public void setOrders(List<Order> orders) { this.orders = orders; }
 
-    public void setAddresses(Set<Address> addresses) {
+   /* public void setAddresses(List<Address> addresses) {
         this.addresses = addresses;
     }
 
@@ -140,7 +146,7 @@ public class Customer implements Serializable {
     public void removeAddress(Address address) {
         getAddresses().remove(address);
     }
-
+*/
     @Override
     public String toString() {
         return "Customer{" +
@@ -151,7 +157,6 @@ public class Customer implements Serializable {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", rating=" + rating +
-                ", addresses=" + addresses +
                 '}';
     }
 }

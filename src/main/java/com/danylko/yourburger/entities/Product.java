@@ -33,13 +33,13 @@ public class Product implements Serializable {
     @Column(name = "VERSION")
     private int version;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-   /* @ManyToMany
+    /*@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+   *//* @ManyToMany
     @JoinTable(name = "product_list",
             joinColumns = @JoinColumn(name = "ORDER_ID"),
             inverseJoinColumns = @JoinColumn(name = "NAME")
-    )*/
-    private Set<ProductOrder> productOrderSet = new HashSet<>();
+    )*//*
+    private Set<ProductOrder> productOrderSet = new HashSet<>();*/
 
     public Product() {
     }
@@ -81,9 +81,9 @@ public class Product implements Serializable {
         return this.price;
     }
 
-    public Set<ProductOrder> getProductOrders() {
+   /* public Set<ProductOrder> getProductOrders() {
         return this.productOrderSet;
-    }
+    }*/
 
     public void setName(String name) {
         this.name = name;
@@ -105,21 +105,17 @@ public class Product implements Serializable {
         this.version = version;
     }
 
-    public void setOrders(Set<ProductOrder> productOrderSet) {
-        this.productOrderSet = productOrderSet;
-    }
-
     public void setProdId(Long prodId) {
         this.prodId = prodId;
     }
 
-    public Set<ProductOrder> getProductOrderSet() {
+    /*public Set<ProductOrder> getProductOrderSet() {
         return productOrderSet;
     }
 
     public void setProductOrderSet(Set<ProductOrder> productOrderSet) {
         this.productOrderSet = productOrderSet;
-    }
+    }*/
 
     @Override
     public String toString() {

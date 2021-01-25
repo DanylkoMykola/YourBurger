@@ -1,14 +1,18 @@
 package com.danylko.yourburger.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "product_list")
-public class ProductOrder {
+public class ProductOrder implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PROD_LIST_ID")
+    @JsonIgnore
     private Long prodListId;
 
     @Column(name = "NAME")
@@ -20,13 +24,14 @@ public class ProductOrder {
     @Column(name = "COUNT")
     private int count;
 
-    @ManyToOne
+   /* @ManyToOne
     @JoinColumn(name = "PROD_ID")
-    private Product product;
+    private Product product;*/
 
-    @ManyToOne
+   /* @ManyToOne
     @JoinColumn(name = "ORDER_ID")
-    private Order order;
+    @JsonIgnore
+    private Order order;*/
 
     public ProductOrder() {
     }
@@ -63,26 +68,27 @@ public class ProductOrder {
         this.prodListId = prodListId;
     }
 
-    public Product getProduct() {
+   /* public Product getProduct() {
         return product;
     }
 
     public void setProduct(Product product) {
         this.product = product;
-    }
+    }*/
 
-    public Order getOrder() {
+   /* public Order getOrder() {
         return order;
     }
 
     public void setOrder(Order order) {
         this.order = order;
-    }
+    }*/
 
 
     @Override
     public String toString() {
         return "ProductOrder{" +
+                ", name=" + name +
                 ", price=" + price +
                 ", amount=" + count +
                 '}';

@@ -11,7 +11,7 @@ public class Facility implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "FAC_ID")
-    private int facId;
+    private Long facId;
 
     @Column(name = "FAC_CITY", length = 40)
     private String facCity;
@@ -22,7 +22,7 @@ public class Facility implements Serializable {
     @OneToOne(mappedBy = "facility")
     private Order order;
 
-    public int getFacId() {
+    public Long getFacId() {
         return facId;
     }
 

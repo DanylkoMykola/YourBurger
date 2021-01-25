@@ -1,7 +1,8 @@
 package com.danylko.yourburger.controller;
 
 import com.danylko.yourburger.entities.*;
-import com.danylko.yourburger.service.ProductOrderMapperImpl;
+import com.danylko.yourburger.service.OrderService;
+import com.danylko.yourburger.service.ProductOrderMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -18,7 +21,10 @@ public class OrderController {
     private Logger logger = LoggerFactory.getLogger(OrderController.class);
 
     @Autowired
-    ProductOrderMapperImpl productOrderMapper;
+    private ProductOrderMapper productOrderMapper;
+
+    @Autowired
+    private OrderService orderService;
 
     @GetMapping("/order")
     public String getOrderPage() {
@@ -38,13 +44,17 @@ public class OrderController {
                             @RequestParam String apartment) {
 
        // logger.info(orderList);
-        Set<ProductOrder> productOrderList = productOrderMapper.getProductOrderList(orderList);
-        //logger.info(productOrderList.toString());
+        List<ProductOrder> productOrderList = productOrderMapper.getProductOrderList(orderList);
+        logger.info(productOrderList.toString());
         Address address = new Address(city, street, streetNumber, apartment);
         Customer customer = new Customer(firstName, lastName, phoneNumber, email);
-        Order order = new Order(productOrderList, null, customer, address, Integer.parseInt(sum));
+        //customer.addAddress(address);
         logger.info(customer.toString());
+        Order order = new Order(productOrderList, null, customer, address, Integer.parseInt(sum));
+
         logger.info(address.toString());
+        logger.info(order.toString());
+        orderService.save(order);
 
         return "index";
     }
