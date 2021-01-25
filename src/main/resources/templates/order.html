@@ -39,7 +39,7 @@
         </div>
         <div>
             <label for="city">Населений пункт</label>
-            <select id="city" >
+            <select id="city" name="city" >
                 <option th:each="facility : ${facilities}"
                         th:value="${facility.servingCity}"
                         th:text="${facility.servingCity}"></option>

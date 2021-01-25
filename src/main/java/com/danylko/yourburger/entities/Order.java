@@ -30,7 +30,7 @@ public class Order implements Serializable {
     )*/
     private List<ProductOrder> productOrderList;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "FAC_ID")
     private Facility facility;
 

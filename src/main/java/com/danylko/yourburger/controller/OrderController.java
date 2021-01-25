@@ -4,6 +4,7 @@ import com.danylko.yourburger.entities.*;
 import com.danylko.yourburger.service.FacilityService;
 import com.danylko.yourburger.service.OrderService;
 import com.danylko.yourburger.service.ProductOrderMapper;
+import com.danylko.yourburger.util.DateFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -63,13 +65,14 @@ public class OrderController {
         Address address = new Address(city, street, streetNumber, apartment);
         Customer customer = new Customer(firstName, lastName, phoneNumber, email);
 
-
+        DateFormatter dateFormatter = new DateFormatter();
+        Date date = dateFormatter.getDate();
         logger.info(customer.toString());
-        Order order = new Order(productOrderList, facility, customer, new Date(), address, Integer.parseInt(sum));
+        Order order = new Order(productOrderList, facility, customer, date, address, Integer.parseInt(sum));
 
         logger.info(address.toString());
         logger.info(order.toString());
-        //orderService.save(order);
+        orderService.save(order);
 
         return "index";
     }

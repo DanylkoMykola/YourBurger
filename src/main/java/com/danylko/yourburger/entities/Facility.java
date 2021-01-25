@@ -2,6 +2,7 @@ package com.danylko.yourburger.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -19,8 +20,8 @@ public class Facility implements Serializable {
     @Column(name = "SERVING_CITY", length = 40)
     private String servingCity;
 
-    @OneToOne(mappedBy = "facility")
-    private Order order;
+    @OneToMany(mappedBy = "facility")
+    private List<Order> orders;
 
     public Long getFacId() {
         return facId;
@@ -34,8 +35,8 @@ public class Facility implements Serializable {
         return servingCity;
     }
 
-    public Order getOrder() {
-        return order;
+    public List<Order> getOrders() {
+        return orders;
     }
 
     public void setFacCity(String facCity) {
@@ -46,8 +47,8 @@ public class Facility implements Serializable {
         this.servingCity = servingCity;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 
     public void setFacId(Long facId) {
@@ -58,10 +59,10 @@ public class Facility implements Serializable {
 
 
 
-    public Facility(String facCity, String servingCity, Order order) {
+    public Facility(String facCity, String servingCity, List<Order> orders) {
         this.facCity = facCity;
         this.servingCity = servingCity;
-        this.order = order;
+        this.orders = orders;
     }
 
     @Override
