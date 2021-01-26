@@ -47,4 +47,11 @@ public class CustomerServiceJPAImpl implements CustomerService {
     public void delete(Customer customer) {
         customerRepository.delete(customer);
     }
+
+    @Override
+    public void checkIfNewCustomer(Customer customer) {
+        Customer customerFromDB = findByPhoneNumber(customer.getPhoneNumber());
+        if (customerFromDB != null)
+            customer = customerFromDB;
+    }
 }
