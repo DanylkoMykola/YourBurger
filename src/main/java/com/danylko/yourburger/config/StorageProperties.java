@@ -9,6 +9,7 @@ public class StorageProperties {
     private String resourceLocation;
     private String uploadFileLocation;
     private String defaultImg;
+    private String pathToAttachment;
 
     public String getResourceLocation() {
         return resourceLocation;
@@ -34,4 +35,11 @@ public class StorageProperties {
         this.defaultImg = defaultImg;
     }
 
+    public String getPathToAttachment() {
+        return pathToAttachment;
+    }
+
+    public void setPathToAttachment(String pathToAttachment) {
+        this.pathToAttachment = pathToAttachment;
+    }
 }
