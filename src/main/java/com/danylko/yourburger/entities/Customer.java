@@ -31,7 +31,7 @@ public class Customer implements Serializable {
     private String phoneNumber;
 
     @Email
-    @Column(name = "EMAIL", unique = true)
+    @Column(name = "EMAIL")
     private String email;
 
     @Column(name = "PASSWORD")

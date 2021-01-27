@@ -1,6 +1,7 @@
 package com.danylko.yourburger.controller;
 
 import com.danylko.yourburger.entities.*;
+import com.danylko.yourburger.service.CustomerService;
 import com.danylko.yourburger.service.FacilityService;
 import com.danylko.yourburger.service.OrderService;
 import com.danylko.yourburger.service.ProductOrderMapper;
@@ -34,6 +35,9 @@ public class OrderController {
     @Autowired
     private FacilityService facilityService;
 
+    @Autowired
+    private CustomerService customerService;
+
     @GetMapping("/order")
     public String getOrderPage(Model model) {
         List<Facility> facilities = facilityService.findAll();
@@ -65,10 +69,12 @@ public class OrderController {
         Address address = new Address(city, street, streetNumber, apartment);
         Customer customer = new Customer(firstName, lastName, phoneNumber, email);
 
+        Customer customerChecked = customerService.checkIfNewCustomer(customer);
+
         DateFormatter dateFormatter = new DateFormatter();
         Date date = dateFormatter.getDate();
         logger.info(customer.toString());
-        Order order = new Order(productOrderList, facility, customer, date, address, Integer.parseInt(sum));
+        Order order = new Order(productOrderList, facility, customerChecked, date, address, Integer.parseInt(sum));
 
         logger.info(address.toString());
         logger.info(order.toString());

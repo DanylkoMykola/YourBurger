@@ -10,5 +10,5 @@ public interface CustomerService {
     Customer findByPhoneNumber(String phoneNumber);
     void save(Customer customer);
     void delete(Customer customer);
-    void checkIfNewCustomer(Customer customer);
+    Customer checkIfNewCustomer(Customer customer);
 }

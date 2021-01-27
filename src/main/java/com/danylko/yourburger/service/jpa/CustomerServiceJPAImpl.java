@@ -3,6 +3,9 @@ package com.danylko.yourburger.service.jpa;
 import com.danylko.yourburger.entities.Customer;
 import com.danylko.yourburger.repos.CustomerRepository;
 import com.danylko.yourburger.service.CustomerService;
+import com.danylko.yourburger.util.PasswordGenerator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +16,9 @@ import java.util.*;
 @Service
 public class CustomerServiceJPAImpl implements CustomerService {
 
+    Logger logger = LoggerFactory.getLogger(CustomerServiceJPAImpl.class);
+
+    @Autowired
     private CustomerRepository customerRepository;
 
     @Autowired
@@ -49,9 +55,12 @@ public class CustomerServiceJPAImpl implements CustomerService {
     }
 
     @Override
-    public void checkIfNewCustomer(Customer customer) {
+    public Customer checkIfNewCustomer(Customer customer) {
         Customer customerFromDB = findByPhoneNumber(customer.getPhoneNumber());
-        if (customerFromDB != null)
-            customer = customerFromDB;
+        if (customerFromDB != null) {
+            return customerFromDB;
+        }
+        customer.setPassword(PasswordGenerator.ganeratePassword());
+        return customer;
     }
 }
