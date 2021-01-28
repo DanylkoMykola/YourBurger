@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Your Burger</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+    </style>
+</head>
+<body>
+<div th:object="${order}" >
+    <div>
+        <h3>Замовник</h3>
+    </div>
+    <table>
+        <tr>
+            <th>Прізвище</th>
+            <td th:text="${order.customer.lastName}"></td>
+        </tr>
+        <tr>
+            <th>Ім'я</th>
+            <td th:text="${order.customer.fristName}"></td>
+        </tr>
+        <tr>
+            <th>Номер телефону</th>
+            <td th:text="${order.customer.phoneNumber}"></td>
+        </tr>
+        <tr>
+            <th>Електрона пошта</th>
+            <td th:text="${order.customer.email}"></td>
+        </tr>
+    </table>
+    <div>
+        <h3>Адреса</h3>
+    </div>
+    <table>
+        <tr>
+            <th>Місто</th>
+            <td th:text="${order.address.city}"></td>
+        </tr>
+        <tr>
+            <th>Вулиця</th>
+            <td th:text="${order.address.street}"></td>
+        </tr>
+        <tr>
+            <th>Номер вулиці</th>
+            <td th:text="${order.address.streetNumber}"></td>
+        </tr>
+        <tr>
+            <th>Квартира</th>
+            <td th:text="${order.address.apartment}"></td>
+        </tr>
+        <tr>
+            <th>Обслуговує бургерна</th>
+            <td th:text="${order.facility.facCity}"></td>
+        </tr>
+    </table>
+    <div>
+        <h3>Замовлення</h3>
+    </div>
+    <div th:if="${not #lists.isEmpty(order.productOrderList)}">
+        <table>
+            <tr>
+                <th>Назва</th>
+                <th>Ціна</th>
+                <th>Кілкість</th>
+            </tr>
+            <tr th:each="productOrder : ${order.productOrderList}">
+                <td th:text="${productOrder.name}"></td>
+                <td th:text="${productOrder.price}"></td>
+                <td th:text="${productOrder.count}"></td>
+            </tr>
+            <tr>
+                <th>Сума</th>
+                <td th:text="${order.totalPrice}"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

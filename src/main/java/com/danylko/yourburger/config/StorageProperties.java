@@ -10,7 +10,7 @@ public class StorageProperties {
     private String uploadFileLocation;
     private String defaultImg;
     private String pathToAttachment;
-    private String htmlTemplate;
+
 
     public String getResourceLocation() {
         return resourceLocation;
@@ -42,13 +42,5 @@ public class StorageProperties {
 
     public void setPathToAttachment(String pathToAttachment) {
         this.pathToAttachment = pathToAttachment;
-    }
-
-    public String getHtmlTemplate() {
-        return htmlTemplate;
-    }
-
-    public void setHtmlTemplate(String htmlTemplate) {
-        this.htmlTemplate = htmlTemplate;
     }
 }

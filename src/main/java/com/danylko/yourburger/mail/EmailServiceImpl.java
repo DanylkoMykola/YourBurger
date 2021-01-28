@@ -49,7 +49,9 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    public void sendMessageWithAttachment(String to, String text) {
+    public void sendMessageWithAttachment(String to,
+                                          String text,
+                                          String pathToAttachment) {
         try {
             MimeMessage message = emailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
@@ -59,7 +61,7 @@ public class EmailServiceImpl implements EmailService {
             helper.setSubject(emailProperties.getSubject());
             helper.setText(text);
 
-            FileSystemResource file = new FileSystemResource(new File(storageProperties.getPathToAttachment()));
+            FileSystemResource file = new FileSystemResource(new File(pathToAttachment));
             helper.addAttachment("Invoice", file);
 
             emailSender.send(message);
@@ -70,12 +72,13 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public void sendMessageUsingThymeleafTemplate(String to,
+                                                  String htmlTemplate,
                                                   Map<String, Object> templateModel)
             throws IOException, MessagingException {
         Context thymeleafContext = new Context();
         thymeleafContext.setVariables(templateModel);
 
-        String htmlBody = thymeleafTemplateEngine.process(storageProperties.getHtmlTemplate(), thymeleafContext);
+        String htmlBody = thymeleafTemplateEngine.process(htmlTemplate, thymeleafContext);
 
         sendHtmlMessage(to, emailProperties.getSubject(), htmlBody);
 

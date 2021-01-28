@@ -121,11 +121,11 @@ public class Order implements Serializable {
         return orderId;
     }
 
-    public List<ProductOrder> getProductOrderSet() {
+    public List<ProductOrder> getProductOrderList() {
         return productOrderList;
     }
 
-    public void setProductOrderSet(List<ProductOrder> productOrderSet) {
+    public void setProductOrderList(List<ProductOrder> productOrderList) {
         this.productOrderList = productOrderList;
     }
 
@@ -133,7 +133,7 @@ public class Order implements Serializable {
     public String toString() {
         return "Order{" +
                 "orderId=" + orderId +
-                ", productOrderSet=" + productOrderList +
+                ", productOrderList=" + productOrderList +
                 ", facility=" + facility +
                 ", customer=" + customer +
                 ", address=" + address +

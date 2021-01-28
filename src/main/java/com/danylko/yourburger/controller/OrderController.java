@@ -1,6 +1,9 @@
 package com.danylko.yourburger.controller;
 
+import com.danylko.yourburger.config.EmailProperties;
+import com.danylko.yourburger.config.StorageProperties;
 import com.danylko.yourburger.entities.*;
+import com.danylko.yourburger.mail.EmailService;
 import com.danylko.yourburger.service.CustomerService;
 import com.danylko.yourburger.service.FacilityService;
 import com.danylko.yourburger.service.OrderService;
@@ -15,11 +18,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import javax.mail.MessagingException;
+import java.io.IOException;
+import java.util.*;
 
 @Controller
 public class OrderController {
@@ -37,6 +38,15 @@ public class OrderController {
 
     @Autowired
     private CustomerService customerService;
+
+    @Autowired
+    private EmailService emailService;
+
+    @Autowired
+    private EmailProperties emailProperties;
+
+    @Autowired
+    private StorageProperties storageProperties;
 
     @GetMapping("/order")
     public String getOrderPage(Model model) {
@@ -76,10 +86,30 @@ public class OrderController {
         logger.info(customer.toString());
         Order order = new Order(productOrderList, facility, customerChecked, date, address, Integer.parseInt(sum));
 
+        Map<String, Object> modelAtt = new HashMap<>();
+        modelAtt.put("order", order);
+        logger.info(emailProperties.getHtmlTemplateOrderResult()+"--------------------------");
+        try {
+            emailService.sendMessageUsingThymeleafTemplate(emailProperties.getFacilityEmail(),
+                    emailProperties.getHtmlTemplateOrderResult(), modelAtt);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //emailService.sendSimpleMessage(email, order.toString());
         logger.info(address.toString());
         logger.info(order.toString());
         orderService.save(order);
 
         return "index";
     }
+
+    //test
+   /* @GetMapping("/email-order-result")
+    public String tempalteOrder(Model model, Order order){
+        model.addAttribute("order", order);
+        return "email-order-result";
+    }*/
 }
