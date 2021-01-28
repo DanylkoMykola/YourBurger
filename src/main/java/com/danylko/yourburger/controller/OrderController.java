@@ -45,8 +45,6 @@ public class OrderController {
     @Autowired
     private EmailProperties emailProperties;
 
-    @Autowired
-    private StorageProperties storageProperties;
 
     @GetMapping("/order")
     public String getOrderPage(Model model) {
@@ -72,10 +70,7 @@ public class OrderController {
         logger.info(productOrderList.toString());
         logger.info(city);
         Facility facility = facilityService.findByServingCity(city);
-        if (facility == null)
-            logger.info("facility == null");
-        else
-            logger.info(facility.toString());
+
         Address address = new Address(city, street, streetNumber, apartment);
         Customer customer = new Customer(firstName, lastName, phoneNumber, email);
 
@@ -88,8 +83,9 @@ public class OrderController {
 
         Map<String, Object> modelAtt = new HashMap<>();
         modelAtt.put("order", order);
-        logger.info(emailProperties.getHtmlTemplateOrderResult()+"--------------------------");
+
         try {
+
             emailService.sendMessageUsingThymeleafTemplate(emailProperties.getFacilityEmail(),
                     emailProperties.getHtmlTemplateOrderResult(), modelAtt);
         } catch (MessagingException e) {

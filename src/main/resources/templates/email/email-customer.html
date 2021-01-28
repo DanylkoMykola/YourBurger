@@ -3,19 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Your Burger</title>
-    <style>
-        .email-logo {
-
-        }
-    </style>
 </head>
 <body>
-<div class="email-logo">
-    <a th:href="@{products}"><img src="../img/ybcLogo.png" alt="Logo"></a>
-</div>
 <div>
-    <h3>Дякую, що зробили замолення!</h3>
-    <p>Ваш пароль: <i></i> .<br>При наступному замовлені вхід у систему значно прискорить процес</p>
+    <h3>Дякую, що зробили замолення в Your Burger!</h3>
+    <p>Ваш пароль: <i th:text="${customer.password}"></i>. При наступному замовлені вхід у систему значно прискорить процес замовлення!</p>
 </div>
 </body>
 </html>

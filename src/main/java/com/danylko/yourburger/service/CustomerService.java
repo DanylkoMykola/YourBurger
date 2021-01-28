@@ -2,6 +2,8 @@ package com.danylko.yourburger.service;
 
 import com.danylko.yourburger.entities.Customer;
 
+import javax.mail.MessagingException;
+import java.io.IOException;
 import java.util.Set;
 
 public interface CustomerService {

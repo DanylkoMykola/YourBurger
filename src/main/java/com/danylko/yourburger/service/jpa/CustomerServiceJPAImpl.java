@@ -1,6 +1,8 @@
 package com.danylko.yourburger.service.jpa;
 
+import com.danylko.yourburger.config.EmailProperties;
 import com.danylko.yourburger.entities.Customer;
+import com.danylko.yourburger.mail.EmailService;
 import com.danylko.yourburger.repos.CustomerRepository;
 import com.danylko.yourburger.service.CustomerService;
 import com.danylko.yourburger.util.PasswordGenerator;
@@ -10,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.mail.MessagingException;
+import java.io.IOException;
 import java.util.*;
 
 @Transactional
@@ -18,12 +22,21 @@ public class CustomerServiceJPAImpl implements CustomerService {
 
     Logger logger = LoggerFactory.getLogger(CustomerServiceJPAImpl.class);
 
-    @Autowired
     private CustomerRepository customerRepository;
+    private EmailService emailService;
+    private EmailProperties emailProperties;
 
     @Autowired
     public void setCustomerRepository(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
+    }
+    @Autowired
+    public void setEmailService(EmailService emailService) {
+        this.emailService = emailService;
+    }
+    @Autowired
+    public void setEmailProperties(EmailProperties emailProperties) {
+        this.emailProperties = emailProperties;
     }
 
     @Override
@@ -61,6 +74,21 @@ public class CustomerServiceJPAImpl implements CustomerService {
             return customerFromDB;
         }
         customer.setPassword(PasswordGenerator.ganeratePassword());
+        sendEmailWithPassword(customer);
         return customer;
+    }
+    private void sendEmailWithPassword(Customer customer) {
+        try {
+            Map<String, Object> modelAttributes = new HashMap<>();
+            modelAttributes.put("customer", customer);
+            emailService.sendMessageUsingThymeleafTemplate(
+                    customer.getEmail(),
+                    emailProperties.getHtmlTemplateCustomer(),
+                    modelAttributes);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

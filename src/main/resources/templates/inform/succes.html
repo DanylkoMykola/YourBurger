@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Your Burger</title>
+    <link rel="stylesheet" th:href="@{/static/css/logoTopnavFooterstyle.css}">
+    <link rel="stylesheet" th:href="@{/static/css/informPage.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div th:replace="~{fragments/header :: header}">Header</div>
+
+<div class="inform-text">
+    <p>Дякуємо, що зробили амовлення</p>
+    <h3>Смачного!</h3>
+</div>
+
+<div th:insert="~{fragments/footer :: footer}">Footer</div>
+
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</body>
+</html>
