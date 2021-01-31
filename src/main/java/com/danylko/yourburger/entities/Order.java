@@ -53,6 +53,9 @@ public class Order implements Serializable {
     @Column(name = "VERSION")
     private int version;
 
+    @Transient
+    private String jsonOrderlist;
+
     public Order() {
     }
 
@@ -129,6 +132,14 @@ public class Order implements Serializable {
         this.productOrderList = productOrderList;
     }
 
+    public String getJsonOrderlist() {
+        return jsonOrderlist;
+    }
+
+    public void setJsonOrderlist(String jsonOrderlist) {
+        this.jsonOrderlist = jsonOrderlist;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
@@ -140,6 +151,7 @@ public class Order implements Serializable {
                 ", price=" + totalPrice +
                 ", orderDate=" + orderDate +
                 ", version=" + version +
+                ", jsonOrderList=" + jsonOrderlist +
                 '}';
     }
 }

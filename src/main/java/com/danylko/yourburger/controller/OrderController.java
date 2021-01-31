@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -50,10 +51,11 @@ public class OrderController {
     public String getOrderPage(Model model) {
         List<Facility> facilities = facilityService.findAll();
         model.addAttribute("facilities", facilities);
+        model.addAttribute("order", new Order());
         return "order";
     }
 
-    @PostMapping("/order")
+   /* @PostMapping("/order")
     public String makeOrder(@RequestParam String orderList,
                             @RequestParam String sum,
                             @RequestParam String firstName,
@@ -85,13 +87,11 @@ public class OrderController {
         modelAtt.put("order", order);
 
         try {
-
             emailService.sendMessageUsingThymeleafTemplate(emailProperties.getFacilityEmail(),
                     emailProperties.getHtmlTemplateOrderResult(), modelAtt);
-        } catch (MessagingException e) {
+        } catch (MessagingException|IOException e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            return "error";
         }
 
         //emailService.sendSimpleMessage(email, order.toString());
@@ -99,7 +99,19 @@ public class OrderController {
         logger.info(order.toString());
         orderService.save(order);
 
-        return "index";
+        return "success";
+    }*/
+
+    @PostMapping("/order")
+    public String makeOrder(@ModelAttribute Order order, Model model) {
+        model.addAttribute("order", order);
+        logger.info(order.toString());
+
+        List<ProductOrder> productOrderList = productOrderMapper.getProductOrderList(order.getJsonOrderlist());
+
+        logger.info(productOrderList.toString());
+
+        return "inform/success";
     }
 
     //test

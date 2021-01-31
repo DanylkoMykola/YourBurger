@@ -23,12 +23,11 @@ function getShoppingResult() {
 
     let cartData = getCartData(),
         totalItems = '',
-        inputItems = '',
         inputSum = '',
         burgerCount = getBurgerCount(),
         cartRes = document.getElementById('cart-result'),
-        cartInput = document.getElementById('cart-result-input'),
-        cartSumInput =document.getElementById('cart-sum-input'),
+        cartInput = document.getElementById('order-list'),
+        cartSumInput =document.getElementById('total-price'),
         sum = 0,
         cartContentArr = [];
 
@@ -65,12 +64,9 @@ function getShoppingResult() {
         }
         totalItems += '<tr class="cart-result-table-row"><td>Разом</td><td>' + sum + '</td><td>'+ burgerCount +'</td></tr>';
         totalItems += '</table>';
-        inputItems = '<input type="hidden" id="order-list" name="orderList" value="'
-            + JSON.stringify(cartContentArr).replace(/"/g, '&quot;') + '" >';
-        inputSum = '<input type="hidden" id="sum" name="sum" value="' + sum +'">';
         cartRes.innerHTML = totalItems;
-        cartInput.innerHTML = inputItems;
-        cartSumInput.innerHTML = inputSum;
+        cartSumInput.setAttribute('value', sum);
+        cartInput.setAttribute('value', JSON.stringify(cartContentArr));
     } else {
         cartRes.innerHTML = '';
         cartInput.innerHTML = '';
