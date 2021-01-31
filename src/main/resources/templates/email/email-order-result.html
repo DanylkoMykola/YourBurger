@@ -66,6 +66,11 @@
     </table>
     <div>
         <h3>Замовлення</h3>
+
+    </div>
+    <div>
+        <p>Дата: </p>
+        <p th:text="${order.orderDate}"></p>
     </div>
     <div th:if="${not #lists.isEmpty(order.productOrderList)}">
         <table>

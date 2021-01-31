@@ -10,7 +10,8 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 
 public class DateFormatter implements Formatter<Date> {
-    public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+    private static final String pattern = "dd-MM-yyyy HH:mm:ss";
+    public static SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
     private Locale uaLocal = new Locale("ua", "UA");
 
     public Date getDate() {
@@ -19,12 +20,12 @@ public class DateFormatter implements Formatter<Date> {
     }
     @Override
     public Date parse(String s, Locale locale) throws ParseException {
-        return DATE_FORMAT.parse(s);
+        return dateFormat.parse(s);
     }
 
     @Override
     public String print(Date date, Locale locale) {
-        return DATE_FORMAT.format(date);
+        return dateFormat.format(date);
     }
 
 }

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Controller
@@ -55,69 +56,34 @@ public class OrderController {
         return "order";
     }
 
-   /* @PostMapping("/order")
-    public String makeOrder(@RequestParam String orderList,
-                            @RequestParam String sum,
-                            @RequestParam String firstName,
-                            @RequestParam String lastName,
-                            @RequestParam String phoneNumber,
-                            @RequestParam String email,
-                            @RequestParam String city,
-                            @RequestParam String street,
-                            @RequestParam String streetNumber,
-                            @RequestParam String apartment) {
+    @PostMapping("/order")
+    public String makeOrder(@ModelAttribute Order order, Model model) {
+        model.addAttribute("order", order);
+        List<ProductOrder> productOrderList = productOrderMapper.getProductOrderList(order.getJsonOrderlist());
+        Customer customer = customerService.checkIfNewCustomer(order.getCustomer());
+        Facility facility = facilityService.findByServingCity(order.getAddress().getCity());
 
-       // logger.info(orderList);
-        List<ProductOrder> productOrderList = productOrderMapper.getProductOrderList(orderList);
-        logger.info(productOrderList.toString());
-        logger.info(city);
-        Facility facility = facilityService.findByServingCity(city);
+        order.setProductOrderList(productOrderList);
+        order.setCustomer(customer);
+        order.setFacility(facility);
 
-        Address address = new Address(city, street, streetNumber, apartment);
-        Customer customer = new Customer(firstName, lastName, phoneNumber, email);
-
-        Customer customerChecked = customerService.checkIfNewCustomer(customer);
-
-        DateFormatter dateFormatter = new DateFormatter();
-        Date date = dateFormatter.getDate();
-        logger.info(customer.toString());
-        Order order = new Order(productOrderList, facility, customerChecked, date, address, Integer.parseInt(sum));
-
-        Map<String, Object> modelAtt = new HashMap<>();
-        modelAtt.put("order", order);
+        order.setOrderDate(new Date());
+        orderService.save(order);
 
         try {
+            Map<String, Object> modelAtt = new HashMap<>();
+            modelAtt.put("order", order);
             emailService.sendMessageUsingThymeleafTemplate(emailProperties.getFacilityEmail(),
                     emailProperties.getHtmlTemplateOrderResult(), modelAtt);
         } catch (MessagingException|IOException e) {
             e.printStackTrace();
-            return "error";
+            logger.error("Email message not sent: " + e);
+            return "inform/error";
         }
-
-        //emailService.sendSimpleMessage(email, order.toString());
-        logger.info(address.toString());
-        logger.info(order.toString());
-        orderService.save(order);
-
-        return "success";
-    }*/
-
-    @PostMapping("/order")
-    public String makeOrder(@ModelAttribute Order order, Model model) {
-        model.addAttribute("order", order);
-        logger.info(order.toString());
-
-        List<ProductOrder> productOrderList = productOrderMapper.getProductOrderList(order.getJsonOrderlist());
 
         logger.info(productOrderList.toString());
 
         return "inform/success";
     }
 
-    //test
-   /* @GetMapping("/email-order-result")
-    public String tempalteOrder(Model model, Order order){
-        model.addAttribute("order", order);
-        return "email-order-result";
-    }*/
 }
