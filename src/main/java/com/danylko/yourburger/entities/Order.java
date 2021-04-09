@@ -1,7 +1,6 @@
 package com.danylko.yourburger.entities;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
+
 
 import javax.persistence.*;
 import java.io.Serializable;

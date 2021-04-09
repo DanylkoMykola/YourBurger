@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login Your Burger</title>
+    <link rel="stylesheet" th:href="@{/css/logoTopnavFooterstyle.css}">
+</head>
+<body>
+
+<div th:replace="~{fragments/header :: header}">Header</div>
+<div>
+    <form method="post" action="/auth/login">
+        <h2>Login</h2>
+        <p>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Username" required>
+        </p>
+        <p>
+            <label for="password">Password</label>
+            <input type="text" id="password" name="password" placeholder="Password" required>
+        </p>
+        <button type="submit">Sing in</button>
+    </form>
+
+</div>
+<div th:insert="~{fragments/footer :: footer}">Footer</div>
+</body>
+</html>

@@ -8,7 +8,8 @@ import com.danylko.yourburger.service.CustomerService;
 import com.danylko.yourburger.util.PasswordGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,21 +23,19 @@ public class CustomerServiceJPAImpl implements CustomerService {
 
     Logger logger = LoggerFactory.getLogger(CustomerServiceJPAImpl.class);
 
-    private CustomerRepository customerRepository;
-    private EmailService emailService;
-    private EmailProperties emailProperties;
+    private final CustomerRepository customerRepository;
+    private final EmailService emailService;
+    private final EmailProperties emailProperties;
+   // private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    public void setCustomerRepository(CustomerRepository customerRepository) {
+    public CustomerServiceJPAImpl(CustomerRepository customerRepository,
+                                  EmailService emailService,
+                                  EmailProperties emailProperties
+                                 ) {
         this.customerRepository = customerRepository;
-    }
-    @Autowired
-    public void setEmailService(EmailService emailService) {
         this.emailService = emailService;
-    }
-    @Autowired
-    public void setEmailProperties(EmailProperties emailProperties) {
         this.emailProperties = emailProperties;
+       // this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -73,7 +72,7 @@ public class CustomerServiceJPAImpl implements CustomerService {
         if (customerFromDB != null) {
             return customerFromDB;
         }
-        customer.setPassword(PasswordGenerator.ganeratePassword());
+        //customer.setPassword(passwordEncoder.encode(PasswordGenerator.ganeratePassword()));
         sendEmailWithPassword(customer);
         return customer;
     }

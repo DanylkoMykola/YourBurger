@@ -1,7 +1,5 @@
 package com.danylko.yourburger.entities;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,10 +10,7 @@ public class Address implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    /*, generator = "address-generator"
-    @TableGenerator(name = "address-generator",
-    table = "addresses",
-    pkColumnName = "ADDRESS_ID")*/
+
     @Column(name = "ADDRESS_ID")
     private Long addressId;
 
@@ -31,9 +26,6 @@ public class Address implements Serializable {
     @Column(name = "APARTMENT_NUMBER", length = 5)
     private String apartment;
 
-   /* @ManyToOne
-    @JoinColumn( name = "CUST_ID")
-    private Customer customer;*/
 
     @OneToOne(mappedBy = "address")
     private Order order;
@@ -60,7 +52,6 @@ public class Address implements Serializable {
         this.street = street;
         this.streetNumber = streetNumber;
         this.apartment = apartment;
-       // this.customer = customer;
         this.order = order;
     }
 
@@ -84,10 +75,6 @@ public class Address implements Serializable {
         return apartment;
     }
 
-   /* public Customer getCustomer() {
-        return customer;
-    }*/
-
     public Order getOrder() { return this.order; }
 
     public void setCity(String city) {
@@ -106,9 +93,6 @@ public class Address implements Serializable {
         this.apartment = apartment;
     }
 
-   /* public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }*/
 
     public void setOrder(Order order) { this.order = order; }
 

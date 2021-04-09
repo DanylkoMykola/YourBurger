@@ -2,8 +2,8 @@ select * from yourburgerdatabase.products;
 
 select * from facilities where serving_city='Стебник';
 
-delete from orders
-where order_id=10;
+delete from yourburgerdatabase.customers;
+
 
 
 drop table yourburgerdatabase.products;
