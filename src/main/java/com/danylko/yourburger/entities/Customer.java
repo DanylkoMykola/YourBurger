@@ -40,11 +40,11 @@ public class Customer implements Serializable {
 
     @Enumerated(value = EnumType.STRING)
     @Column(name = "ROLE")
-    private Role role;
+    private Role role = Role.CUSTOMER;
 
     @Enumerated(value = EnumType.STRING)
     @Column(name = "STATUS")
-    private Status status;
+    private Status status = Status.ACTIVE;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orders;

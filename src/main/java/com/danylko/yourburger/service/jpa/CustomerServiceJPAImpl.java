@@ -9,6 +9,7 @@ import com.danylko.yourburger.util.PasswordGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -72,8 +73,10 @@ public class CustomerServiceJPAImpl implements CustomerService {
         if (customerFromDB != null) {
             return customerFromDB;
         }
-        //customer.setPassword(passwordEncoder.encode(PasswordGenerator.ganeratePassword()));
+        String password = PasswordGenerator.ganeratePassword();
+        customer.setPassword(password);
         sendEmailWithPassword(customer);
+        customer.setPassword(new BCryptPasswordEncoder(12).encode(password));
         return customer;
     }
     private void sendEmailWithPassword(Customer customer) {

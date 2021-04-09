@@ -40,17 +40,21 @@ public class ProductController {
     }
 
     @GetMapping("/admin-create")
+    @PreAuthorize("hasAnyAuthority('admin:read')")
     public String createProduct() {
         return "admin-create";
     }
 
     @GetMapping("/admin-update")
+    @PreAuthorize("hasAnyAuthority('admin:read')")
     public String update() {return "admin-update";}
 
     @GetMapping("/admin-delete")
+    @PreAuthorize("hasAnyAuthority('admin:read')")
     public String delete() {return "admin-delete";}
 
     @PostMapping("/admin-create")
+    @PreAuthorize("hasAnyAuthority('admin:write')")
     public String createProduct(@RequestParam String name,
                                 @RequestParam String description,
                                 @RequestParam String price,
@@ -67,6 +71,7 @@ public class ProductController {
     }
     //TODO
     @PostMapping("/admin-update")
+    @PreAuthorize("hasAnyAuthority('admin:write')")
     public String update(@RequestParam(name = "prodName") String prodName,
                          @RequestParam(name = "name") String name,
                          @RequestParam(name = "description") String description,
@@ -97,6 +102,7 @@ public class ProductController {
     }
 
     @PostMapping("admin-delete")
+    @PreAuthorize("hasAnyAuthority('admin:write')")
     public String delete(@RequestParam String name, RedirectAttributes attributes) {
        Product product = productService.findByName(name);
         if (product == null) {

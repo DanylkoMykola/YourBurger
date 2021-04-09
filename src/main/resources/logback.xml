@@ -13,7 +13,7 @@
 
     <logger name="com.danylko.yourburger" level="debug"/>
 
-    <logger name="org.springframework" level="off"/>
+    <logger name="org.springframework" level="all"/>
 
     <logger name="org.springframework.boot.autoconfigure.security" level="on"/>
 
