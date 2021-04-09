@@ -3,7 +3,6 @@
     width: 30%;
     margin-left: 35%;
 }
-/* Style inputs */
 input[type=text], select {
     width: 100%;
     padding: 12px 20px;
@@ -14,7 +13,6 @@ input[type=text], select {
     box-sizing: border-box;
 }
 
-/* Style the submit button */
 input[type=submit] {
     width: 100%;
     background-color: #4CAF50;
@@ -26,7 +24,7 @@ input[type=submit] {
     cursor: pointer;
 }
 
-/* Add a background color to the submit button on mouse-over */
+
 input[type=submit]:hover {
     background-color: #45a049;
 }

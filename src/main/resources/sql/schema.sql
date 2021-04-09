@@ -7,23 +7,23 @@ CREATE TABLE  PRODUCTS (
                          DESCRIPTION VARCHAR(1000),
                          PRICE INT NOT NULL,
                          VERSION INT NOT NULL,
-                         PRIMARY KEY (PROD_ID),
-                         PRIMARY KEY (NAME)
+                         PRIMARY KEY (PROD_ID)
+
 );
 
 DROP TABLE IF EXISTS CUSTOMERS;
 
 CREATE TABLE CUSTOMERS (
                            CUST_ID INT NOT NULL AUTO_INCREMENT,
-                           ADDRESS_ID INT NOT NULL,
                            FIRST_NAME VARCHAR(40),
                            LAST_NAME VARCHAR(40),
                            PHONE_NUMBER VARCHAR(30),
                            EMAIL VARCHAR(80),
                            PASSWORD VARCHAR(50),
-                           RATING INT,
-                           PRIMARY KEY  (CUST_ID),
-                           FOREIGN KEY (ADDRESS_ID) REFERENCES ADDRESSES(ADDRESS_ID)
+                           ROLE varchar(30),
+                           STATUS varchar(30),
+                           PRIMARY KEY  (CUST_ID)
+
 );
 
 DROP TABLE IF EXISTS ADDRESSES;
@@ -70,7 +70,7 @@ CREATE TABLE PRODUCT_LIST (
     ORDER_ID INT NOT NULL,
     NAME INT NOT NULL,
     AMOUNT INT,
-    FOREIGN KEY (ORDER_ID) REFERENCES ORDERS(ORDER_ID),
-    FOREIGN KEY (NAME) REFERENCES PRODUCTS(NAME)
+    FOREIGN KEY (ORDER_ID) REFERENCES ORDERS(ORDER_ID)
+
 );
 
