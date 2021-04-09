@@ -15,7 +15,7 @@
     <div>
         <div id="cart-result"></div>
     </div>
-    <form action="#" th:action="@{/order}" th:object="${order}" method="post" > <!--Here input file.java for recive POST-->
+    <form action="#" th:action="@{/order}" th:object="${order}" method="post" >
         <div>
             <input type="hidden" id="order-list" th:field="*{jsonOrderlist}" name="orderList" value="" >
         </div>
