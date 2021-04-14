@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>customer-nav</title>
+</head>
+<body>
+<div th:fragment="customer-nav">
+    <div class="auth-nav-container">
+        <nav>
+            <div sec:authorize="isAuthenticated()">
+                <div>
+                    <a th:href="@{/auth/customer}"> <i class="fas fa-user-alt"></i> <span>Мій кабінет</span></a>
+                </div>
+                <div>
+                    <form action="/auth/logout" method="post">
+                        <button type="submit">Вийти</button>
+                    </form>
+                </div>
+            </div>
+            <div sec:authorize="isAnonymous()">
+                <div>
+                    <a th:href="@{/auth/login}">Вхід</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+</body>
+</html>
