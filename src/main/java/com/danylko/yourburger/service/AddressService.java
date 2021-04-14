@@ -13,6 +13,7 @@ public interface AddressService {
     Address findById(Long id);
     Address findByCity(String city);
     Address findByStreet(String street);
+    Address findByCustomerId(Long id);
     void save(Address address);
     void delete(Address address);
 }

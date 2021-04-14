@@ -5,9 +5,7 @@ package com.danylko.yourburger.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "orders")
@@ -15,18 +13,10 @@ public class Order implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    /*, generator = "orders-generator"
-    @TableGenerator(name = "orders-generator",
-            table = "orders",
-            pkColumnName = "ORDER_ID")*/
     @Column(name = "ORDER_ID")
     private Long orderId;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    /*@JoinTable(name = "product_list",
-            joinColumns = @JoinColumn(name = "ORDER_ID"),
-            inverseJoinColumns = @JoinColumn(name = "NAME")
-    )*/
     private List<ProductOrder> productOrderList;
 
     @ManyToOne(cascade = CascadeType.ALL)

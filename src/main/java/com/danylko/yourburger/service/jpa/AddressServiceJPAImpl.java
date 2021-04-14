@@ -53,4 +53,9 @@ public class AddressServiceJPAImpl implements AddressService {
     public void delete(Address address) {
         addressRepository.delete(address);
     }
+
+    @Override
+    public Address findByCustomerId(Long id) {
+        return addressRepository.findAddressByCustomerId(id);
+    }
 }

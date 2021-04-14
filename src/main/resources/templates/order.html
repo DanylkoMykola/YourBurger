@@ -36,7 +36,7 @@
         </div>
         <div>
             <label for="email">Електронна пошта</label>
-            <input type="text" id="email"  name="email" th:field="*{customer.email}" required pattern="[a-zA-Z0-9]+@gmail.com" placeholder="example@gmail.com">
+            <input type="text" id="email"  name="email" th:field="*{customer.email}" required pattern="[a-zA-Z0-9]+@[a-z0-9]+\.[a-z]+" placeholder="example@gmail.com">
         </div>
         <div>
             <label for="city">Населений пункт</label>
@@ -48,7 +48,7 @@
         </div>
         <div>
             <label for="street">Вулиця</label>
-            <input type="text" id="street"  name="street" th:field="*{address.street}" required placeholder="Вкажіть вулицю">
+            <input type="text" id="street"  name="street" th:field="*{address.street}" required pattern="[а-яА-Яa-zA-Z\.,- ]+" placeholder="Вкажіть вулицю">
         </div>
         <div>
             <label for="streetNumber">Номер будинку</label>

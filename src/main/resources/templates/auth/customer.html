@@ -31,6 +31,22 @@
                 <th>Електрона пошта</th>
                 <td th:text="${customer.email}"></td>
             </tr>
+            <tr>
+                <th>Місто</th>
+                <td th:text="${address.city}"></td>
+            </tr>
+            <tr>
+                <th>Вулиця</th>
+                <td th:text="${address.street}"></td>
+            </tr>
+            <tr>
+                <th>Номер вулиці</th>
+                <td th:text="${address.streetNumber}"></td>
+            </tr>
+            <tr>
+                <th>Номер квартири</th>
+                <td th:text="${address?.apartment}"></td>
+            </tr>
         </table>
     </div>
 </div>
