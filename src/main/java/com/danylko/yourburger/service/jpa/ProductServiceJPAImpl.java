@@ -14,7 +14,7 @@ import java.util.List;
 @Transactional
 @Service
 @Qualifier("productServiceJPA")
-public class ProductSeviceJPAImpl implements ProductService {
+public class ProductServiceJPAImpl implements ProductService {
 
     private ProductRepository productRepository;
 

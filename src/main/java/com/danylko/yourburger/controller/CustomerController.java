@@ -28,7 +28,7 @@ public class CustomerController {
         this.addressService = addressService;
     }
 
-    @GetMapping("/auth/customer")
+    @GetMapping("/customer")
     public String getCustomer(Principal principal, Model model) {
        // log.info(principal.getName());
         if (principal != null) {

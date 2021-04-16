@@ -10,7 +10,7 @@
         <nav>
             <div sec:authorize="isAuthenticated()">
                 <div>
-                    <a th:href="@{/auth/customer}"> <i class="fas fa-user-alt"></i> <span>Мій кабінет</span></a>
+                    <a th:href="@{/customer}"> <i class="fas fa-user-alt"></i> <span>Мій кабінет</span></a>
                 </div>
                 <div>
                     <form action="/auth/logout" method="post">
@@ -20,7 +20,7 @@
             </div>
             <div sec:authorize="isAnonymous()">
                 <div>
-                    <a th:href="@{/auth/login}">Вхід</a>
+                    <a th:href="@{/login}">Вхід</a>
                 </div>
             </div>
         </nav>

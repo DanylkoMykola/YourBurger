@@ -4,10 +4,7 @@ import com.danylko.yourburger.config.EmailProperties;
 import com.danylko.yourburger.config.StorageProperties;
 import com.danylko.yourburger.entities.*;
 import com.danylko.yourburger.mail.EmailService;
-import com.danylko.yourburger.service.CustomerService;
-import com.danylko.yourburger.service.FacilityService;
-import com.danylko.yourburger.service.OrderService;
-import com.danylko.yourburger.service.ProductOrderMapper;
+import com.danylko.yourburger.service.*;
 import com.danylko.yourburger.util.DateFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -48,22 +46,42 @@ public class OrderController {
     @Autowired
     private EmailProperties emailProperties;
 
+    @Autowired
+    private AddressService addressService;
+
 
     @GetMapping("/order")
-    public String getOrderPage(Model model) {
+    public String getOrderPage(Principal principal, Model model) {
         List<Facility> facilities = facilityService.findAll();
         model.addAttribute("facilities", facilities);
         model.addAttribute("order", new Order());
+
+        if (principal != null) {
+            Customer customer = customerService.findByPhoneNumber(principal.getName());
+            Address address = addressService.findByCustomerId(customer.getCustId());
+            model.addAttribute("customer", customer);
+            model.addAttribute("address", address);
+        }
         return "order";
     }
 
     @PostMapping("/order")
-    public String makeOrder(@ModelAttribute Order order, Model model) {
+    public String makeOrder(@ModelAttribute Order order,
+                            @ModelAttribute Address address,
+                            Principal principal, Model model) {
         model.addAttribute("order", order);
-        List<ProductOrder> productOrderList = productOrderMapper.getProductOrderList(order.getJsonOrderlist());
-        Customer customer = customerService.checkIfNewCustomer(order.getCustomer());
-        Facility facility = facilityService.findByServingCity(order.getAddress().getCity());
+        Customer customer;
+        if (principal != null) {
+            customer = customerService.findByPhoneNumber(principal.getName());
+        } else {
+            customer = customerService.checkIfNewCustomer(order.getCustomer());
+        }
 
+        List<ProductOrder> productOrderList = productOrderMapper.getProductOrderList(order.getJsonOrderlist());
+        Facility facility = facilityService.findByServingCity(address.getCity());
+
+        order.setAddress(address);
+        logger.info(order.getAddress().toString());
         order.setProductOrderList(productOrderList);
         order.setCustomer(customer);
         order.setFacility(facility);
