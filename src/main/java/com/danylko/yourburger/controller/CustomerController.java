@@ -18,9 +18,8 @@ public class CustomerController {
 
     private Logger log = LoggerFactory.getLogger(CustomerController.class);
 
-    private final CustomerService customerService;
-
-    private final AddressService addressService;
+    private CustomerService customerService;
+    private AddressService addressService;
 
     public CustomerController(CustomerService customerService,
                               AddressService addressService) {

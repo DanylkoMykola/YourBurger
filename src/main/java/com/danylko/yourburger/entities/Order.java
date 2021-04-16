@@ -2,11 +2,18 @@ package com.danylko.yourburger.entities;
 
 
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+@Data
+@ToString
+@NoArgsConstructor
 @Entity
 @Table(name = "orders")
 public class Order implements Serializable {
@@ -45,102 +52,4 @@ public class Order implements Serializable {
     @Transient
     private String jsonOrderlist;
 
-    public Order() {
-    }
-
-    public Order(List<ProductOrder> productOrderList, Facility facility, Customer customer, Date orderDate, Address address, int totalPrice) {
-        this.productOrderList = productOrderList;
-        this.facility = facility;
-        this.customer = customer;
-        this.orderDate=orderDate;
-        this.address = address;
-        this.totalPrice = totalPrice;
-    }
-
-    public List<ProductOrder> getProductOrders() {
-        return productOrderList;
-    }
-
-    public Facility getFacility() {
-        return facility;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public int getTotalPrice() {
-        return totalPrice;
-    }
-
-    public Date getOrderDate() {
-        return orderDate;
-    }
-
-    public int getVersion() {
-        return version;
-    }
-
-    public void setFacility(Facility facility) {
-        this.facility = facility;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-    public void setTotalPrice(int totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
-    }
-
-    public void setVersion(int version) {
-        this.version = version;
-    }
-
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public List<ProductOrder> getProductOrderList() {
-        return productOrderList;
-    }
-
-    public void setProductOrderList(List<ProductOrder> productOrderList) {
-        this.productOrderList = productOrderList;
-    }
-
-    public String getJsonOrderlist() {
-        return jsonOrderlist;
-    }
-
-    public void setJsonOrderlist(String jsonOrderlist) {
-        this.jsonOrderlist = jsonOrderlist;
-    }
-
-    @Override
-    public String toString() {
-        return "Order{" +
-                "orderId=" + orderId +
-                ", productOrderList=" + productOrderList +
-                ", facility=" + facility +
-                ", customer=" + customer +
-                ", address=" + address +
-                ", price=" + totalPrice +
-                ", orderDate=" + orderDate +
-                ", version=" + version +
-                ", jsonOrderList=" + jsonOrderlist +
-                '}';
-    }
 }

@@ -31,7 +31,7 @@ public class ProductController {
         this.storageService = storageService;
     }
 
-    @GetMapping({"/", "/products", "/auth/products"})
+    @GetMapping({"/", "/products", "/products"})
     public String getProductsList(Model uiModel) {
         List<Product> products = productService.findAll();
         storageService.loadAll(products);

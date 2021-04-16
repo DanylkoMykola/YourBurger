@@ -21,17 +21,21 @@ import java.util.Map;
 @Service
 public class EmailServiceImpl implements EmailService {
 
-    @Autowired
+
     private EmailProperties emailProperties;
-
-    @Autowired
     private StorageProperties storageProperties;
-
-    @Autowired
     private JavaMailSender emailSender;
-
-    @Autowired
     private SpringTemplateEngine thymeleafTemplateEngine;
+
+    public EmailServiceImpl(EmailProperties emailProperties,
+                            StorageProperties storageProperties,
+                            JavaMailSender emailSender,
+                            SpringTemplateEngine thymeleafTemplateEngine) {
+        this.emailProperties = emailProperties;
+        this.storageProperties = storageProperties;
+        this.emailSender = emailSender;
+        this.thymeleafTemplateEngine = thymeleafTemplateEngine;
+    }
 
     @Override
     public void sendSimpleMessage(String to, String text) {

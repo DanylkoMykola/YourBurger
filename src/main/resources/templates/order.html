@@ -84,7 +84,23 @@
                 </div>
             </div>
             <div>
-                <label for="city">Населений пункт</label>
+                <label for="fname-auth">Ім'я</label>
+                <input type="hidden" id="fname-auth" name="firstName" th:field="${customer.firstName}">
+            </div>
+            <div>
+                <label for="lname-auth">Прізвище</label>
+                <input type="hidden" id="lname-auth"  name="lastName" th:field="${customer.lastName}" >
+            </div>
+            <div>
+                <label for="telnum-auth">Номер телефону</label>
+                <input type="hidden" id="telnum-auth"  name="phoneNumber" th:field="${customer.phoneNumber}" >
+            </div>
+            <div>
+                <label for="email-auth">Електронна пошта</label>
+                <input type="hidden" id="email-auth"  name="email" th:field="${customer.email}">
+            </div>
+            <div>
+                <label for="city-auth">Населений пункт</label>
                 <select id="city-auth" name="city" th:field="${address.city}" >
                     <option th:each="facility : ${facilities}"
                             th:value="${facility.servingCity}"
@@ -93,15 +109,15 @@
                 </select>
             </div>
             <div>
-                <label for="street">Вулиця</label>
+                <label for="street-auth">Вулиця</label>
                 <input type="text" id="street-auth"  name="street" th:field="${address.street}"  required pattern="[а-яА-Яa-zA-Z\.,\- ]+" placeholder="Вкажіть вулицю" th:value="${address.street}">
             </div>
             <div>
-                <label for="streetNumber">Номер будинку</label>
+                <label for="streetNumber-auth">Номер будинку</label>
                 <input type="text" id="streetNumber-auth"  name="streetNumber" th:field="${address.streetNumber}"  placeholder="Вкажіть номер">
             </div>
             <div>
-                <label for="apartment">Номер квартири</label>
+                <label for="apartment-auth">Номер квартири</label>
                 <input type="text" id="apartment-auth"  name="apartment" th:field="${address.apartment}" placeholder="Вкажіть номер" >
             </div>
         </div>

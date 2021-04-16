@@ -4,6 +4,7 @@ package com.danylko.yourburger.entities;
 import com.danylko.yourburger.enums.Role;
 import com.danylko.yourburger.enums.Status;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @Data
 @ToString
+@NoArgsConstructor
 @Entity
 @Table(name = "customers")
 public class Customer implements Serializable {
