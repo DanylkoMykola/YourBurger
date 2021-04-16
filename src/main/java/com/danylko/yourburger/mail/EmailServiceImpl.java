@@ -73,8 +73,7 @@ public class EmailServiceImpl implements EmailService {
     @Override
     public void sendMessageUsingThymeleafTemplate(String to,
                                                   String htmlTemplate,
-                                                  Map<String, Object> templateModel)
-            throws IOException, MessagingException {
+                                                  Map<String, Object> templateModel) throws MessagingException {
         Context thymeleafContext = new Context();
         thymeleafContext.setVariables(templateModel);
 

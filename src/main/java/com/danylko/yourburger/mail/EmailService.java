@@ -14,5 +14,5 @@ public interface EmailService {
     void sendMessageUsingThymeleafTemplate(String to,
                                            String htmlTemplate,
                                            Map<String, Object> templateModel)
-            throws IOException, MessagingException;
+            throws  MessagingException;
 }

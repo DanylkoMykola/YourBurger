@@ -17,11 +17,11 @@ CREATE TABLE CUSTOMERS (
                            CUST_ID INT NOT NULL AUTO_INCREMENT,
                            FIRST_NAME VARCHAR(40),
                            LAST_NAME VARCHAR(40),
-                           PHONE_NUMBER VARCHAR(30),
-                           EMAIL VARCHAR(80),
-                           PASSWORD VARCHAR(50),
-                           ROLE varchar(30),
-                           STATUS varchar(30),
+                           PHONE_NUMBER VARCHAR(25),
+                           EMAIL VARCHAR(255),
+                           PASSWORD VARCHAR(255),
+                           ROLE varchar(255),
+                           STATUS varchar(255),
                            PRIMARY KEY  (CUST_ID)
 
 );
@@ -31,8 +31,8 @@ DROP TABLE IF EXISTS ADDRESSES;
 CREATE TABLE ADDRESSES (
                            ADDRESS_ID INT NOT NULL AUTO_INCREMENT,
                            CITY VARCHAR(40),
-                           STREET VARCHAR(60),
-                           STREET_NUMBER VARCHAR(10),
+                           STREET VARCHAR(100),
+                           STREET_NUMBER VARCHAR(15),
                            APARTMENT_NUMBER VARCHAR(5),
                            PRIMARY KEY (ADDRESS_ID)
 );

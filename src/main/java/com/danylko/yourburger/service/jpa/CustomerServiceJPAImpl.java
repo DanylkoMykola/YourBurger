@@ -64,29 +64,27 @@ public class CustomerServiceJPAImpl implements CustomerService {
         customerRepository.delete(customer);
     }
 
-    @Override
-    public Customer checkIfNewCustomer(Customer customer) {
+    public Customer getExistCustomerOrGeneratePasswordForNewCustomer(Customer customer) {
         Customer customerFromDB = findByPhoneNumber(customer.getPhoneNumber());
         if (customerFromDB != null) {
             return customerFromDB;
         }
-        String password = PasswordGenerator.ganeratePassword();
-        customer.setPassword(password);
-        sendEmailWithPassword(customer);
-        customer.setPassword(new BCryptPasswordEncoder(12).encode(password));
+        createAndSendPasswordForCustomer(customer);
         return customer;
     }
-    private void sendEmailWithPassword(Customer customer) {
+    private void createAndSendPasswordForCustomer(Customer customer) {
+        String password = PasswordGenerator.ganeratePassword();
+        sendEmailWithPassword(customer, password);
+        customer.setPassword(new BCryptPasswordEncoder(12).encode(password));
+    }
+
+    private void sendEmailWithPassword(Customer customer, String password) {
         try {
-            Map<String, Object> modelAttributes = new HashMap<>();
-            modelAttributes.put("customer", customer);
             emailService.sendMessageUsingThymeleafTemplate(
                     customer.getEmail(),
                     emailProperties.getHtmlTemplateCustomer(),
-                    modelAttributes);
+                    Map.of("customer", customer,"password", password));
         } catch (MessagingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
             e.printStackTrace();
         }
     }

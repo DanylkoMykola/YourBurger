@@ -1,26 +1,21 @@
 package com.danylko.yourburger.controller;
 
 import com.danylko.yourburger.config.EmailProperties;
-import com.danylko.yourburger.config.StorageProperties;
 import com.danylko.yourburger.entities.*;
 import com.danylko.yourburger.mail.EmailService;
 import com.danylko.yourburger.service.*;
-import com.danylko.yourburger.util.DateFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
 import java.security.Principal;
-import java.time.LocalDateTime;
 import java.util.*;
 
 @Controller
@@ -28,27 +23,29 @@ public class OrderController {
 
     private Logger logger = LoggerFactory.getLogger(OrderController.class);
 
-    @Autowired
     private ProductOrderMapper productOrderMapper;
-
-    @Autowired
     private OrderService orderService;
-
-    @Autowired
     private FacilityService facilityService;
-
-    @Autowired
     private CustomerService customerService;
-
-    @Autowired
     private EmailService emailService;
-
-    @Autowired
     private EmailProperties emailProperties;
-
-    @Autowired
     private AddressService addressService;
 
+    public OrderController(ProductOrderMapper productOrderMapper,
+                            OrderService orderService,
+                            FacilityService facilityService,
+                            CustomerService customerService,
+                            EmailService emailService,
+                            EmailProperties emailProperties,
+                            AddressService addressService) {
+        this.productOrderMapper = productOrderMapper;
+        this.orderService = orderService;
+        this.facilityService = facilityService;
+        this.customerService = customerService;
+        this.emailService = emailService;
+        this.emailProperties = emailProperties;
+        this.addressService = addressService;
+    }
 
     @GetMapping("/order")
     public String getOrderPage(Principal principal, Model model) {
@@ -67,21 +64,20 @@ public class OrderController {
 
     @PostMapping("/order")
     public String makeOrder(@ModelAttribute Order order,
-                            @ModelAttribute Address address,
-                            Principal principal, Model model) {
-        model.addAttribute("order", order);
+                            @ModelAttribute Address authAddress,
+                            @ModelAttribute Customer authCustomer) {
         Customer customer;
-        if (principal != null) {
-            customer = customerService.findByPhoneNumber(principal.getName());
+
+        if (authCustomer.getCustId() != null && authAddress.getAddressId() != null) {
+            customer = authCustomer;
+            order.setAddress(authAddress);
         } else {
-            customer = customerService.checkIfNewCustomer(order.getCustomer());
+            customer = customerService.getExistCustomerOrGeneratePasswordForNewCustomer(order.getCustomer());
         }
 
         List<ProductOrder> productOrderList = productOrderMapper.getProductOrderList(order.getJsonOrderlist());
-        Facility facility = facilityService.findByServingCity(address.getCity());
+        Facility facility = facilityService.findByServingCity(order.getAddress().getCity());
 
-        order.setAddress(address);
-        logger.info(order.getAddress().toString());
         order.setProductOrderList(productOrderList);
         order.setCustomer(customer);
         order.setFacility(facility);
@@ -90,18 +86,15 @@ public class OrderController {
         orderService.save(order);
 
         try {
-            Map<String, Object> modelAtt = new HashMap<>();
-            modelAtt.put("order", order);
             emailService.sendMessageUsingThymeleafTemplate(emailProperties.getFacilityEmail(),
-                    emailProperties.getHtmlTemplateOrderResult(), modelAtt);
-        } catch (MessagingException|IOException e) {
+                    emailProperties.getHtmlTemplateOrderResult(),
+                    Map.of("order", order));
+        } catch (MessagingException e) {
             e.printStackTrace();
             logger.error("Email message not sent: " + e);
             return "inform/error";
         }
-
         logger.info(productOrderList.toString());
-
         return "inform/success";
     }
 

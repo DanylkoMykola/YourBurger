@@ -18,7 +18,7 @@ public class NavigationController {
         return "find-on-map";
     }
 
-    @GetMapping("about-us")
+    @GetMapping("/about-us")
     public String getAboutUs() {
         return "about-us";
     }

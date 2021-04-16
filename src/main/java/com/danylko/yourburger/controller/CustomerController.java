@@ -30,7 +30,6 @@ public class CustomerController {
 
     @GetMapping("/customer")
     public String getCustomer(Principal principal, Model model) {
-       // log.info(principal.getName());
         if (principal != null) {
             Customer customer = customerService.findByPhoneNumber(principal.getName());
             Address address = addressService.findByCustomerId(customer.getCustId());
