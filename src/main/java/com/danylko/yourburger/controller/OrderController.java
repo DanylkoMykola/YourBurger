@@ -67,7 +67,7 @@ public class OrderController {
                             @ModelAttribute Address authAddress,
                             @ModelAttribute Customer authCustomer) {
         Customer customer;
-        logger.info(authCustomer.toString() + "111111111111111111" + authAddress.toString());
+        logger.info(authCustomer.toString() + "!!!!!!!!!!!!!!!!!" + authAddress.toString());
         if (authCustomer.getPhoneNumber() != null && authAddress.getCity() != null) {
             customer = customerService.getExistCustomerOrGeneratePasswordForNewCustomer(authCustomer);
             order.setAddress(authAddress);

@@ -26,7 +26,7 @@ public class ProductController {
     private final StorageService storageService;
 
 
-    public ProductController(@Qualifier("productServiceJDBC") ProductService productService, StorageService storageService) {
+    public ProductController(@Qualifier("productServiceJPAImpl") ProductService productService, StorageService storageService) {
         this.productService = productService;
         this.storageService = storageService;
     }
@@ -92,7 +92,7 @@ public class ProductController {
         if (!price.isEmpty()) {
             product.setPrice(Integer.parseInt(price));
         }
-        if (file.isEmpty()) {
+        if (!file.isEmpty()) {
             String fileName = storageService.store(file);
             product.setImage(fileName);
         }

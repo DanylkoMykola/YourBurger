@@ -1,8 +1,6 @@
 package com.danylko.yourburger.mail;
 
 import com.danylko.yourburger.config.EmailProperties;
-import com.danylko.yourburger.config.StorageProperties;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
@@ -15,7 +13,6 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.File;
-import java.io.IOException;
 import java.util.Map;
 
 @Service
@@ -23,16 +20,13 @@ public class EmailServiceImpl implements EmailService {
 
 
     private EmailProperties emailProperties;
-    private StorageProperties storageProperties;
     private JavaMailSender emailSender;
     private SpringTemplateEngine thymeleafTemplateEngine;
 
     public EmailServiceImpl(EmailProperties emailProperties,
-                            StorageProperties storageProperties,
                             JavaMailSender emailSender,
                             SpringTemplateEngine thymeleafTemplateEngine) {
         this.emailProperties = emailProperties;
-        this.storageProperties = storageProperties;
         this.emailSender = emailSender;
         this.thymeleafTemplateEngine = thymeleafTemplateEngine;
     }
