@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -70,5 +71,10 @@ public class ProductServiceJDBCImpl implements ProductService {
         String sql = "DELETE FROM PRODUCTS WHERE PROD_ID = :ID";
         parameterJdbcTemplate.update(sql, new MapSqlParameterSource("id", product.getProdId()));
 
+    }
+
+    @Override
+    public void checkEmptyFields(Product product, String name, String description, String price, MultipartFile image) {
+        throw new RuntimeException("Unsupported operation!");
     }
 }

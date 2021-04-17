@@ -3,10 +3,12 @@ package com.danylko.yourburger.service.jpa;
 import com.danylko.yourburger.entities.Product;
 import com.danylko.yourburger.repos.ProductRepository;
 import com.danylko.yourburger.service.ProductService;
+import com.danylko.yourburger.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +19,12 @@ import java.util.List;
 public class ProductServiceJPAImpl implements ProductService {
 
     private ProductRepository productRepository;
+    private StorageService storageService;
 
-    @Autowired
-    public void setProductRepository(ProductRepository productRepository) {
+    public ProductServiceJPAImpl(ProductRepository productRepository,
+                                 StorageService storageService) {
         this.productRepository = productRepository;
+        this.storageService = storageService;
     }
 
     @Override
@@ -48,5 +52,26 @@ public class ProductServiceJPAImpl implements ProductService {
 
     @Override
     public void delete(Product product) { productRepository.delete(product); }
+
+    @Override
+    public void checkEmptyFields(Product product,
+                                 String name,
+                                 String description,
+                                 String price,
+                                 MultipartFile image) {
+        if (!name.isEmpty()) {
+            product.setName(name);
+        }
+        if (!description.isEmpty()) {
+            product.setDescription(description);
+        }
+        if (!price.isEmpty()) {
+            product.setPrice(Integer.parseInt(price));
+        }
+        if (!image.isEmpty()) {
+            String fileName = storageService.store(image);
+            product.setImage(fileName);
+        }
+    }
 
 }
