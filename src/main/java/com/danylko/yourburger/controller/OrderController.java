@@ -6,7 +6,6 @@ import com.danylko.yourburger.mail.EmailService;
 import com.danylko.yourburger.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.mail.MessagingException;
-import java.io.IOException;
 import java.security.Principal;
 import java.util.*;
 
@@ -91,8 +89,7 @@ public class OrderController {
                     Map.of("order", order));
         } catch (MessagingException e) {
             e.printStackTrace();
-            logger.error("Email message not sent: " + e);
-            return "inform/error";
+            logger.error("Order message not sent: " + e);
         }
         logger.info(productOrderList.toString());
         return "inform/success";

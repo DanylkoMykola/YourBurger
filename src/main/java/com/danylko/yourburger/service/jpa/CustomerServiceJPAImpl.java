@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.MessagingException;
-import java.io.IOException;
 import java.util.*;
 
 @Transactional
@@ -85,7 +84,7 @@ public class CustomerServiceJPAImpl implements CustomerService {
                     emailProperties.getHtmlTemplateCustomer(),
                     Map.of("customer", customer,"password", password));
         } catch (MessagingException e) {
-            e.printStackTrace();
+            logger.error("The password message not sent! " + e);
         }
     }
 }

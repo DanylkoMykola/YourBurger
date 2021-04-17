@@ -13,9 +13,12 @@
 <div th:replace="~{fragments/header :: header}">Header</div>
 
 <div class="inform-text-container">
-    <h3>На жаль щось пішло не так!</h3>
-    <img src="../img/error-img.png"  alt="error" width="329" height="534">
-
+    <h1>Сталася помилка</h1>
+    <h3 th:text="${url}"></h3>
+    <div>
+        <p th:text="${exception.message}"></p>
+    </div>
+    
 </div>
 
 <div th:insert="~{fragments/footer :: footer}">Footer</div>
